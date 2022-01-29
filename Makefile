@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:49:29 by soum              #+#    #+#              #
-#    Updated: 2022/01/11 12:53:05 by soum             ###   ########.fr        #
+#    Updated: 2022/01/29 15:05:22 by semin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,12 @@ INCLUDES = ./includes/minishell.h
 
 CC = gcc
 CFLAGES = -Wall -Wextra -Werror
+READLINEFLAGS = -lreadline $(READLINELIBDIR)
 
+COMFILE_FLAGS = -lreadline -L ~/.brew/opt/readline/lib
+OBJ_FLAGS = -I ~/.brew/opt/readline/include
 .c.o :
-	$(CC) $(CFLAGES) -c $< -o $(<:.c=.o) -I $(INCLUDES)
+	$(CC) $(CFLAGES) $(OBJ_FLAGS) -c $< -o $(<:.c=.o) -I $(INCLUDES)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -29,7 +32,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	make all -C $(LIBFT)/
-	$(CC) $(CFLAGES) $(OBJS) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLAGES) $(OBJS) $(COMFILE_FLAGS) $(LIBFT_LIB) -o $(NAME)
 
 re : fclean all
 
