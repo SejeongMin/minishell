@@ -6,16 +6,16 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:41:40 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 18:32:43 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:46:24 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-int two_time_error(char *str)
+int	two_time_error(char *str)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (str[index])
@@ -35,10 +35,36 @@ int two_time_error(char *str)
 	return (0);
 }
 
+int	quote_error(char *str)
+{
+	int	index;
+	int	single_cnt;
+	int	double_cnt;
+
+	index = 0;
+	single_cnt = 0;
+	double_cnt = 0;
+	while (str[index])
+	{
+		if (str[index] == '\'')
+			single_cnt++;
+		else if (str[index] == '\"')
+			double_cnt++;
+		index++;
+	}
+	if (single_cnt % 2 || double_cnt % 2)
+		return (1);
+	return (0);
+}
+
 int	check_cmd(t_data *data)
 {
-	char *str = data->cmd_set;
+	char	*str;
+
+	str = data->cmd_set;
 	if (two_time_error(str) == 1)
 		error_msg("shell : syntax error near unexpected token\n");
+	if (quote_error(str) == 1)
+		error_msg("shell : quote_error\n");
 	return (0);
 }

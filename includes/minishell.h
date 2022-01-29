@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 18:29:57 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:47:35 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct s_m_list
 {
-	void *content;
-	struct s_list *next;
+	void			*content;
+	struct s_list	*next;
 }t_m_list;
 
 typedef struct s_cmd
@@ -41,8 +41,8 @@ typedef struct s_data
 {
 	char		*cmd_set;
 	t_m_list	*lstlast;
-	t_cmd	*cmd;
-	char	*buff;
+	t_cmd		*cmd;
+	char		*buff;
 }	t_data;
 //prompt.c
 void	show_prompt(t_data *data);

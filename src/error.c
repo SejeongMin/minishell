@@ -6,14 +6,14 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:27:32 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 18:34:10 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:47:46 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-void error_msg(char *str)
+void	error_msg(char *str)
 {
 	printf("%s", str);
 }
