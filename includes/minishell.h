@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 17:46:42 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:29:57 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ void	setting_signal(void);
 //check_cmd.c
 int		check_cmd(t_data *data);
 void	parsing_cmd(t_data *data);
+//error.c
+void	error_msg(char *str);
 #endif

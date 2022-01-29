@@ -6,17 +6,18 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 17:29:58 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:20:25 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-//void	init_struct(t_data *data)
-//{
-
-//}
+void	init_struct(t_data *data)
+{
+	data->cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	setting_signal();
+}
 
 void	sig_handler(int signal)
 {

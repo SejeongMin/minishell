@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 17:53:34 by soum             ###   ########.fr       */
+/*   Updated: 2022/01/29 18:34:51 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ int	main(void)
 {
 	t_data data;
 
-	//init_struct(&data);
+	init_struct(&data);
 	setting_signal();
 	while (1)
 	{
 		show_prompt(&data);
 		if (check_cmd(&data) == 1)
-			return (0);
-		parsing_cmd(&data);
+		{
+
+		}
+		//	return (0);
+		//parsing_cmd(&data);
 	}
 	return (0);
 }
