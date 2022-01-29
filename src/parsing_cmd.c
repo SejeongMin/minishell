@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 17:53:34 by soum             ###   ########.fr       */
+/*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
+/*   Updated: 2022/01/29 17:51:51 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
-#include "./Libft/libft.h"
+#include "../includes/minishell.h"
+#include "../Libft/libft.h"
 
-int	main(void)
+void parsing_cmd(t_data *data)
 {
-	t_data data;
 
-	//init_struct(&data);
-	setting_signal();
-	while (1)
-	{
-		show_prompt(&data);
-		if (check_cmd(&data) == 1)
-			return (0);
-		parsing_cmd(&data);
-	}
-	return (0);
 }
