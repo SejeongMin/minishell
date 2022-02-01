@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 18:20:25 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/01 15:25:07 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	init_struct(t_data *data)
 {
-	data->cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	data->lstlast = NULL;
 	setting_signal();
 }
 

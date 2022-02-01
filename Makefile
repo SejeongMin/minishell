@@ -6,7 +6,7 @@
 #    By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:49:29 by soum              #+#    #+#              #
-#    Updated: 2022/01/29 18:32:07 by soum             ###   ########.fr        #
+#    Updated: 2022/02/01 17:30:34 by soum             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = main.c \
 	   src/check_cmd.c \
 	   src/parsing_cmd.c \
 	   src/error.c \
+	   src/free_list.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a
