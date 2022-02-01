@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 00:22:47 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/01 23:23:35 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@
 typedef struct s_m_list
 {
 	void			*content;
-	struct s_list	*next;
-}t_m_list;
+	struct s_m_list	*next;
+}	t_m_list;
 
 typedef struct s_cmd
 {
 	char	**cmdline;
 	int		flag;
 	char	quote;
+	//추가
+	int		fd[2];
 }	t_cmd;
 
 typedef struct s_data
@@ -75,5 +77,12 @@ void	ft_exit(t_cmd *cmd);
 
 void	ft_cd(t_cmd *cmd, t_env *env);
 
+t_env	*find_env(char *key, t_env *env);
+
+t_m_list	*execute(t_m_list *list, t_env *env);
+void	execute_cmd(t_cmd *cmd, t_env *env);
+void	execute_list(t_m_list *list, t_env *env);
+
+void	set_pipe(t_m_list *list, t_env *env);
 
 #endif

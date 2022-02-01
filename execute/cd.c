@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:52:14 by semin             #+#    #+#             */
-/*   Updated: 2022/02/01 01:42:21 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/01 23:29:24 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 
 	if (!cmd->cmdline[1] || !ft_strcmp(cmd->cmdline[1], "~"))
 		chdir(find_env("HOME", env)->value);
-	if (!ft_strcmp("-", cmd->cmdline[1]))
+	else if (!ft_strcmp("-", cmd->cmdline[1]))
 		ft_chdir(cmd->cmdline[1], env);
 	else
 	{

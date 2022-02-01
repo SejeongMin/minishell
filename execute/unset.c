@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:14 by semin             #+#    #+#             */
-/*   Updated: 2022/01/31 21:50:14 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/01 15:14:28 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_unset(t_cmd *cmd, t_env *env)
 	i = 1;
 	while (cmd->cmdline[i])
 	{
-		if (ft_isalpha(cmd->cmdline[i][0]))
+		if (ft_isalpha(cmd->cmdline[i][0]) || cmd->cmdline[i][0] == '_')
 			delete_env(&env, cmd->cmdline[i]);
 		else
 			printf("minishell: unset: `%s\': not a valid identifier\n", cmd->cmdline[i]);

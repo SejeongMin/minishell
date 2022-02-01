@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:11 by semin             #+#    #+#             */
-/*   Updated: 2022/01/31 21:50:24 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/01 15:15:09 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_export(t_cmd *cmd, t_env *env)
 		i = 1;
 		while (cmd->cmdline[i])
 		{
-			if (ft_isalpha(cmd->cmdline[i][0]))
+			if (ft_isalpha(cmd->cmdline[i][0]) || cmd->cmdline[i][0] == '_')
 			{
 				cur->next = new_env(cmd->cmdline[i]);
 				cur = cur->next;

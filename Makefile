@@ -6,7 +6,7 @@
 #    By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:49:29 by soum              #+#    #+#              #
-#    Updated: 2022/02/01 01:30:52 by semin            ###   ########.fr        #
+#    Updated: 2022/02/01 23:30:14 by semin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@ NAME = minishell
 SRCS = main.c \
 		execute/execute.c \
 		execute/env.c \
+		execute/env_util.c \
 		execute/unset.c \
 		execute/export.c \
 		execute/exit.c \
 		execute/cd.c \
 		execute/echo.c \
+		execute/pipe.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a
