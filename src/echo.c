@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 14:52:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 23:36:24 by semin            ###   ########.fr       */
+/*   Created: 2022/02/01 01:30:27 by semin             #+#    #+#             */
+/*   Updated: 2022/02/01 01:43:24 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
+#include "../Libft/libft.h"
 
-size_t	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-	{
-		len++;
-	}
-	return (len);
-}
+// void	ft_echo(t_cmd *cmd)
+// {
+// 	return ;
+// }

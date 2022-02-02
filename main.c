@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/01/29 16:44:06 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/01 23:10:04 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,23 @@ void	handler(int signal)
 	}
 }
 
-int main(void)
+int main(int ac, char **av, char **envp)
 {
 	char *str;
 	struct termios term;
+	(void)ac;
+	(void)av;
+
+	t_env	*env;
 
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ECHOCTL);	// 제어문자 반향 off
 	// term.c_cc[VMIN] = 1;	// minimum number of bytes in input queue
 	// term.c_cc[VTIME] = 0;	// how long to wait
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+
+	env = init_env(envp);
+	//env 초기화
 
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
@@ -51,7 +58,7 @@ int main(void)
 		else
 		{
 			add_history(str);
-			printf("str : %s\n", str);
+			parsing(str, env);
 			free(str);
 		}
 	}
