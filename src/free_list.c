@@ -6,12 +6,19 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:30:13 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 15:27:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:59:40 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+
+void	free_env_list(t_data *data)
+{
+	t_env *env;
+
+	env = data->env;
+}
 
 void	free_cmd_data(t_cmd *content)
 {

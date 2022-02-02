@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/02 15:26:23 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 16:00:16 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,41 +94,3 @@ void	execute_list(t_m_list *list, t_env *env) //list 실행
 		cur = execute(cur, env);
 	}
 }
-
-// 테스트용
-int	wdcount(char const *s, char c)
-{
-	int	wd;
-
-	wd = 0;
-	while (*s && *s == c)
-		s++;
-	while (*s)
-	{
-		if (*s != c)
-		{
-			wd++;
-			while (*s != c && *s)
-				s++;
-		}
-		if (*s)
-			s++;
-	}
-	return (wd);
-}
-/*
-void	parsing(char *line, t_env *env)
-{
-	t_cmd	*cmd;
-
-	int ac = wdcount(line, ' ');
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	cmd->cmdline = (char **)malloc(sizeof(char *) * (ac + 1));
-	cmd->cmdline = ft_split(line, ' ');
-	cmd->flag = 0;
-
-	execute_cmd(cmd, env);
-	free(cmd->cmdline);
-	free(cmd);
-}
-*/
