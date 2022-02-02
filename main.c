@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 18:37:55 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 14:17:09 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,24 @@ void all_print_list(t_data *data)
 
 }
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
 	t_data	*data;
+	(void)ac;
+	(void)av;
 
 	data = (t_data *)malloc(sizeof(t_data));
-	init_struct(data);
+	init_struct(data, envp);
 	while (1)
 	{
 		show_prompt(data);
 		if (check_cmd(data) == 0)
 		{
 			parsing(data);
-			all_print_list(data);
+		//	all_print_list(data);
 			free_cmd_list(data);
 		}
-		system("leaks minishell");
+	//	system("leaks minishell");
 	}
 	return (0);
 }

@@ -6,16 +6,17 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 15:25:07 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 14:07:39 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-void	init_struct(t_data *data)
+void	init_struct(t_data *data, char **envp)
 {
 	data->lstlast = NULL;
+	data->env = init_env(envp);
 	setting_signal();
 }
 

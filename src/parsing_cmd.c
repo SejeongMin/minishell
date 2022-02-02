@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 18:26:34 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 14:13:12 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
+	execute_cmd(data->lstlast->content, data->env);
 }

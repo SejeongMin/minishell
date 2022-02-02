@@ -6,7 +6,7 @@
 #    By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:49:29 by soum              #+#    #+#              #
-#    Updated: 2022/02/01 17:30:34 by soum             ###   ########.fr        #
+#    Updated: 2022/02/02 14:01:10 by soum             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,15 @@ SRCS = main.c \
 	   src/parsing_cmd.c \
 	   src/error.c \
 	   src/free_list.c \
+	   src/execute.c \
+	   src/env.c \
+	   src/env_util.c \
+	   src/unset.c \
+	   src/export.c \
+	   src/exit.c \
+	   src/cd.c \
+	   src/echo.c \
+	   src/pipe.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a
