@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/01 23:23:50 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/02 14:47:49 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	wdcount(char const *s, char c)
 	}
 	return (wd);
 }
-
+/*
 void	parsing(char *line, t_env *env)
 {
 	t_cmd	*cmd;
@@ -131,3 +131,4 @@ void	parsing(char *line, t_env *env)
 	free(cmd->cmdline);
 	free(cmd);
 }
+*/
