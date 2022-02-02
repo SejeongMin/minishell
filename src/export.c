@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:11 by semin             #+#    #+#             */
-/*   Updated: 2022/02/01 15:15:09 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/02 15:26:58 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	ft_export(t_cmd *cmd, t_env *env)
 				cur = cur->next;
 			}
 			else
-				printf("minishell: export: `%s\': not a valid identifier\n", cmd->cmdline[i]);
+				printf("minishell: export: `%s\': not a valid identifier\n", \
+						cmd->cmdline[i]);
 			i++;
 		}
 	}

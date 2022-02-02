@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/02 14:47:49 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:26:23 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	exec_extern(t_cmd *cmd, char **env)
 	// exit 정보 저장
 }
 
-void execute_extern(t_cmd *cmd, char **env)
+void	execute_extern(t_cmd *cmd, char **env)
 {
 	pid_t	pid;
 	int		status;

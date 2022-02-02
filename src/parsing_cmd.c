@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 14:13:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:27:48 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	t_m_list	*new_list;
 
 	list = data->lstlast;
-	new_list = (t_m_list*)malloc(sizeof(t_m_list));
+	new_list = (t_m_list *)malloc(sizeof(t_m_list));
 	cmd_data = (t_cmd *)malloc(sizeof(t_cmd));
-	cmd_data->cmdline = ft_split(cmd,' ');
+	cmd_data->cmdline = ft_split(cmd, ' ');
 	if (let == '|')
 		cmd_data->flag = 1;
 	else if (let == ';' || let == '\0')
 		cmd_data->flag = 0;
 	new_list->content = cmd_data;
 	new_list->next = NULL;
-
 	if (list == NULL)
 		data->lstlast = new_list;
 	else

@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:10:06 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 18:37:07 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:28:07 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	show_prompt(t_data *data)
 		printf("\033[10C");
 		printf(" exit\n");
 		exit(-1);
-
 	}
 	else if (data->cmd_set[0] == '\0')
 	{

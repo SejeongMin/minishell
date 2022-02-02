@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:52:14 by semin             #+#    #+#             */
-/*   Updated: 2022/02/01 23:29:24 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/02 15:24:55 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	{
 		stat_ret = stat(cmd->cmdline[1], &filestat);
 		if (stat_ret == -1)
-			printf("minishell: cd: %s: No such file or directory\n", cmd->cmdline[1]);
+			printf("minishell: cd: %s: No such file or directory\n", \
+					cmd->cmdline[1]);
 		else if (!S_ISDIR(filestat.st_mode))
 			printf("minishell: cd: %s: Not a directory\n", cmd->cmdline[1]);
 		else

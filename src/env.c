@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:31:41 by semin             #+#    #+#             */
-/*   Updated: 2022/01/31 03:58:42 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/02 15:25:45 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ t_env	*new_env(char *envline)
 	return (new_env);
 }
 
-int		get_envlen(char **env)
+int	get_envlen(char **env)
 {
 	int	ret;
 
 	ret = 0;
 	while (env[ret])
 		ret++;
-	return ret;
+	return (ret);
 }
 
 t_env	*init_env(char **envp)
@@ -63,7 +63,7 @@ t_env	*init_env(char **envp)
 	return (env);
 }
 
-int		env_num(t_env *env)
+int	env_num(t_env *env)
 {
 	int		ret;
 	t_env	*cur;

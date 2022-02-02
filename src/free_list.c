@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:30:13 by soum              #+#    #+#             */
-/*   Updated: 2022/02/01 18:37:39 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:27:12 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	free_cmd_data(t_cmd *content)
 
 void	free_cmd_list(t_data *data)
 {
-	t_m_list *tmp_list;
-	t_m_list *list;
+	t_m_list	*tmp_list;
+	t_m_list	*list;
 
 	list = data->lstlast;
 	tmp_list = data->lstlast;
