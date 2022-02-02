@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 14:17:09 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/02 15:56:10 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	main(int ac, char **av, char **envp)
 		//	all_print_list(data);
 			free_cmd_list(data);
 		}
-	//	system("leaks minishell");
+		//free_env_list(data);
+		//system("leaks minishell");
 	}
 	return (0);
 }
