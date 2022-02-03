@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 15:58:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/03 18:44:36 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
-	execute_list(data->lstlast, data->env);
+	// execute_list(data->lstlast, data->env);
+	execute(data->lstlast, data->env);
 //	execute_cmd(data->lstlast->content, data->env);
 }

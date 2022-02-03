@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/02 15:26:23 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/03 22:51:55 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec_extern(t_cmd *cmd, char **env)
 		i++;
 	}
 	printf("minishell: %s: command not found\n", cmd->cmdline[0]);
+	exit(-1);
 	// exit 정보 저장
 }
 
@@ -45,7 +46,7 @@ void	execute_extern(t_cmd *cmd, char **env)
 	if (pid == 0)
 	{
 		exec_extern(cmd, env);
-		exit(0);
+		// exit(0);
 		// exit status 필요
 	}
 	else
@@ -72,63 +73,48 @@ void	execute_cmd(t_cmd *cmd, t_env *env)
 		execute_extern(cmd, make_envp(env));
 }
 
-t_m_list	*execute(t_m_list *list, t_env *env)
-{
-	t_cmd	*cmd;
-
-	cmd = list->content;
-	if (cmd->flag == 1) //pipe O
-		set_pipe(list, env);
-	else
-		execute_cmd(cmd, env);
-	return (list->next);
-}
-
-void	execute_list(t_m_list *list, t_env *env) //list 실행
+void	execute_list(t_m_list *list, t_env *env)
 {
 	t_m_list	*cur;
+	int			prev;
 
 	cur = list;
+	prev = 0;
 	while (cur)
 	{
-		cur = execute(cur, env);
-	}
-}
-
-// 테스트용
-int	wdcount(char const *s, char c)
-{
-	int	wd;
-
-	wd = 0;
-	while (*s && *s == c)
-		s++;
-	while (*s)
-	{
-		if (*s != c)
+		if (cur->content->flag == 1)
 		{
-			wd++;
-			while (*s != c && *s)
-				s++;
+			create_child(cur, env);
+			prev = 1;
 		}
-		if (*s)
-			s++;
+		else if (prev == 1)
+		{
+			create_child(cur, env);
+			prev = 0;
+		}
+		else
+		{
+			execute_cmd(cur->content, env);
+			prev = 0;
+		}
+		cur = cur->next;
 	}
-	return (wd);
 }
-/*
-void	parsing(char *line, t_env *env)
+
+void	execute(t_m_list *list, t_env *env)
 {
-	t_cmd	*cmd;
+	t_m_list	*cur;
+	int			prev;
+	int stdin_dup = dup(0);
+	int stdout_dup = dup(1);
 
-	int ac = wdcount(line, ' ');
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	cmd->cmdline = (char **)malloc(sizeof(char *) * (ac + 1));
-	cmd->cmdline = ft_split(line, ' ');
-	cmd->flag = 0;
-
-	execute_cmd(cmd, env);
-	free(cmd->cmdline);
-	free(cmd);
+	stdin_dup = dup(0);
+	stdout_dup = dup(1);
+	cur = list;
+	prev = 0;
+	execute_list(list, env);
+	dup2(stdin_dup, 0);
+	dup2(stdout_dup, 1);
+	close(stdin_dup);
+	close(stdout_dup);
 }
-*/

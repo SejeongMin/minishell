@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 15:23:19 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/03 22:45:53 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_cmd
 	char	**cmdline;
 	int		flag;
 	char	quote;
+	int		fd[2];
 }	t_cmd;
 
 typedef struct s_env
@@ -87,9 +88,11 @@ void		ft_cd(t_cmd *cmd, t_env *env);
 
 t_env		*find_env(char *key, t_env *env);
 
-t_m_list	*execute(t_m_list *list, t_env *env);
+void		execute(t_m_list *list, t_env *env);
+// t_m_list	*execute(t_m_list *list, t_env *env);
 void		execute_cmd(t_cmd *cmd, t_env *env);
 void		execute_list(t_m_list *list, t_env *env);
 
-void		set_pipe(t_m_list *list, t_env *env);
+void		create_child(t_m_list *list, t_env *env);
+void		child(t_m_list *list, t_env *env);
 #endif
