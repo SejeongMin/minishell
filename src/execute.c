@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/04 16:59:52 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/04 19:40:08 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exec_extern(t_cmd *cmd, char **env)
 		i++;
 	}
 	printf("minishell: %s: command not found\n", cmd->cmdline[0]);
-	exit(-1);
+	exit(127);
 	// exit 정보 저장
 }
 
@@ -42,7 +42,7 @@ void	execute_extern(t_cmd *cmd, char **env)
 
 	pid = fork();
 	if (pid < 0)
-		exit(1);
+		exit(errno);
 	if (pid == 0)
 	{
 		exec_extern(cmd, env);
@@ -86,7 +86,8 @@ void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 		else if (prev == 1)
 			create_child(cur, env);
 		else
-			execute_cmd(cur->content, env);
+			rd_handler(cur->content, env);
+			// execute_cmd(cur->content, env);
 		prev = cur->content->flag;
 		if (prev == 0)
 		{

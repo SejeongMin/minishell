@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/04 17:00:37 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/04 19:35:47 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 
 typedef struct s_m_list
 {
@@ -94,4 +97,8 @@ void		execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout);
 //pipe.c
 void		create_child(t_m_list *list, t_env *env);
 void		child(t_m_list *list, t_env *env);
+
+//redirection.c
+void	rd_handler(t_cmd *cmd, t_env *env);
+
 #endif

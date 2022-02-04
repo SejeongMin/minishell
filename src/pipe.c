@@ -13,6 +13,7 @@ void	child(t_m_list *list, t_env *env)
 		close(cmd->fd[1]);
 	}
 	execute_cmd(cmd, env);
+	// rd_handler(cmd, env);
 	exit(0);
 }
 

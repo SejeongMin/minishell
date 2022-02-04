@@ -28,6 +28,7 @@ SRCS = main.c \
 	   src/cd.c \
 	   src/echo.c \
 	   src/pipe.c \
+	   src/redirection.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a
