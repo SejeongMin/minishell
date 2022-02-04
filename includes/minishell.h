@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/03 22:45:53 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/04 17:00:37 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,11 @@ void		ft_exit(t_cmd *cmd);
 void		ft_cd(t_cmd *cmd, t_env *env);
 
 t_env		*find_env(char *key, t_env *env);
-
+// execute.c
 void		execute(t_m_list *list, t_env *env);
-// t_m_list	*execute(t_m_list *list, t_env *env);
 void		execute_cmd(t_cmd *cmd, t_env *env);
-void		execute_list(t_m_list *list, t_env *env);
-
+void		execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout);
+//pipe.c
 void		create_child(t_m_list *list, t_env *env);
 void		child(t_m_list *list, t_env *env);
 #endif
