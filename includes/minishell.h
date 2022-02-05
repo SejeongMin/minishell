@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/05 14:32:37 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/05 21:09:10 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,14 @@ int	rd_handler(t_cmd *cmd);
 
 void		free_env_list(t_data *data);
 void		free_envp(char **envp);
+void		reparsing_env(t_data *data);
+char		*cmdline_change(char *cmdline, t_env *env);
+char		*replace_dollar(char *str, t_env *env);
+int			sep_cnt_quote(char *cmd, char c);
+void		putin(char *cmd, char *cmdline, int from, int i);
+void		sep_cmdline(char *cmd, char c, char **cmdline);
+char		**quote_split(char *cmd, char c);
+char		*double_quote();
+char		*single_quote();
+int			get_keylen(char *str);
 #endif

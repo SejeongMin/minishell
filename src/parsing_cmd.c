@@ -6,12 +6,79 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/05 01:35:53 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/05 21:15:12 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+
+char	*double_quote();
+
+char	*single_quote(char *cmdline, int index)
+{
+	(void)cmdline;
+	(void)index;
+	return (NULL);
+}
+
+char *cmdline_change(char *cmdline, t_env *env)
+{
+	char *tmp;
+	int index;
+	char let;
+	int quote_flag;
+	char *env_value;
+
+	index = 0;
+	tmp = "";
+	quote_flag = 1;
+	while (cmdline[index])
+	{
+		if (cmdline[index] == '\'')
+		{
+			quote_flag = 0;
+		}
+		else if (cmdline[index] == '"')
+		{
+		}
+		else if (cmdline[index] == '$' && quote_flag)
+		{
+			env_value = replace_dollar(cmdline, env);
+			tmp = ft_strjoin(tmp, env_value);
+			free(env_value);
+			index = index + get_keylen(&cmdline[index]);
+		}
+		else
+		{
+			let = cmdline[index];
+			tmp = ft_strjoin(tmp, &let);
+		}
+		index++;
+	}
+	free(cmdline);
+	return (tmp);
+}
+
+void	reparsing_env(t_data *data)
+{
+	t_m_list *list;
+	int		index;
+	char	**cmdline;
+
+	list = data->lstlast;
+	index = 0;
+	while (list)
+	{
+		cmdline = list->content->cmdline;
+		while (cmdline[index])
+		{
+			cmdline[index] = cmdline_change(cmdline[index], data->env);
+			index++;
+		}
+		list = list->next;
+	}
+}
 
 void	put_in_cmd(t_data *data, char *cmd, char let)
 {
@@ -26,7 +93,10 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	cmd_data->out = 0;
 	if (ft_strrchr(cmd, '>'))
 		cmd_data->out = 1;
-	cmd_data->cmdline = ft_split(cmd, ' ');
+	if (ft_strchr(cmd, '"') || ft_strchr(cmd, '\''))
+		cmd_data->cmdline = quote_split(cmd, ' ');
+	else
+		cmd_data->cmdline = ft_split(cmd, ' ');
 	if (let == '|')
 		cmd_data->flag = 1;
 	else if (let == ';' || let == '\0')
@@ -75,6 +145,7 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
+	reparsing_env(data);
 	// execute_list(data->lstlast, data->env);
 	execute(data->lstlast, data->env);
 //	execute_cmd(data->lstlast->content, data->env);
