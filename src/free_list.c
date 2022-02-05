@@ -6,30 +6,12 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:30:13 by soum              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/04 20:11:02 by soum             ###   ########.fr       */
-=======
-/*   Updated: 2022/02/04 23:56:02 by semin            ###   ########.fr       */
->>>>>>> f1990b24e8b155698a5eed93397013f6389a9d77
+/*   Updated: 2022/02/05 14:31:22 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
-
-void 	free_envp(char **env)
-{
-	int index;
-
-	index = 0;
-	while(env[index])
-	{
-		free(env[index]);
-		index++;
-	}
-	free(env[index]);
-	free(env);
-}
 
 void	free_env_list(t_data *data)
 {
@@ -48,6 +30,21 @@ void	free_env_list(t_data *data)
 		env = NULL;
 		env = tmp_env;
 	}
+	env = data->env;
+}
+
+void	free_envp(char **env)
+{
+	int index;
+
+	index = 0;
+	while (env[index])
+	{
+		free(env[index]);
+		index++;
+	}
+	free(env[index]);
+	free(env);
 }
 
 void	free_cmd_data(t_cmd *content)

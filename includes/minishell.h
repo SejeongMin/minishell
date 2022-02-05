@@ -6,11 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/04 19:58:55 by soum             ###   ########.fr       */
-=======
-/*   Updated: 2022/02/05 01:34:12 by semin            ###   ########.fr       */
->>>>>>> f1990b24e8b155698a5eed93397013f6389a9d77
+/*   Updated: 2022/02/05 14:32:37 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +103,5 @@ void		child(t_m_list *list, t_env *env);
 int	rd_handler(t_cmd *cmd);
 
 void		free_env_list(t_data *data);
-void		free_envp(char **env);
+void		free_envp(char **envp);
 #endif
