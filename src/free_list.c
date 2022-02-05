@@ -13,6 +13,13 @@
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
+void	free_env_list(t_data *data)
+{
+	t_env *env;
+
+	env = data->env;
+}
+
 void	free_cmd_data(t_cmd *content)
 {
 	t_cmd	*data;

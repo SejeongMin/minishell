@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 		if (check_cmd(data) == 0)
 		{
 			parsing(data);
-		//	all_print_list(data);
+			//all_print_list(data);
 			free_cmd_list(data);
 		}
 		//free_env_list(data);

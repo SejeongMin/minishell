@@ -55,6 +55,8 @@ void	parsing_proc(t_data *data, char *tmp)
 	tmp_len = ft_strlen(tmp);
 	while (i <= tmp_len)
 	{
+		if (tmp[i] == '\0' && (tmp[i -1] == ';' || tmp[i -i] == '|'))
+			break;
 		if (tmp[i] == ';' || tmp[i] == '|' || tmp[i] == '\0')
 		{
 			cmd = (char *)malloc(sizeof(char) * (i - j + 1));

@@ -102,4 +102,5 @@ void		child(t_m_list *list, t_env *env);
 //redirection.c
 int	rd_handler(t_cmd *cmd);
 
+void		free_env_list(t_data *data);
 #endif
