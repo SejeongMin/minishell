@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/04 19:58:55 by soum             ###   ########.fr       */
+=======
+/*   Updated: 2022/02/05 01:34:12 by semin            ###   ########.fr       */
+>>>>>>> f1990b24e8b155698a5eed93397013f6389a9d77
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +27,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 
 typedef struct s_m_list
 {
@@ -35,6 +42,8 @@ typedef struct s_cmd
 	char	**cmdline;
 	int		flag;
 	char	quote;
+	int		fd[2];
+	int		out;
 }	t_cmd;
 
 typedef struct s_env
@@ -86,12 +95,16 @@ void		ft_exit(t_cmd *cmd);
 void		ft_cd(t_cmd *cmd, t_env *env);
 
 t_env		*find_env(char *key, t_env *env);
-
-t_m_list	*execute(t_m_list *list, t_env *env);
+// execute.c
+void		execute(t_m_list *list, t_env *env);
 void		execute_cmd(t_cmd *cmd, t_env *env);
-void		execute_list(t_m_list *list, t_env *env);
+void		execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout);
+//pipe.c
+void		create_child(t_m_list *list, t_env *env);
+void		child(t_m_list *list, t_env *env);
 
-void		set_pipe(t_m_list *list, t_env *env);
+//redirection.c
+int	rd_handler(t_cmd *cmd);
 
 void		free_env_list(t_data *data);
 void		free_envp(char **env);

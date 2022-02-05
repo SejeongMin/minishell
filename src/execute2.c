@@ -6,7 +6,11 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/04 20:14:46 by soum             ###   ########.fr       */
+=======
+/*   Updated: 2022/02/05 01:25:19 by semin            ###   ########.fr       */
+>>>>>>> f1990b24e8b155698a5eed93397013f6389a9d77
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +35,7 @@ void	exec_extern(t_cmd *cmd, char **env)
 		i++;
 	}
 	printf("minishell: %s: command not found\n", cmd->cmdline[0]);
+	exit(127);
 	// exit 정보 저장
 }
 
@@ -41,11 +46,10 @@ void	execute_extern(t_cmd *cmd, char **env)
 
 	pid = fork();
 	if (pid < 0)
-		exit(1);
+		exit(errno);
 	if (pid == 0)
 	{
 		exec_extern(cmd, env);
-		exit(0);
 		// exit status 필요
 	}
 	else
@@ -73,25 +77,48 @@ void	execute_cmd(t_cmd *cmd, t_env *env)
 		execute_extern(cmd, make_envp(env));
 }
 
-t_m_list	*execute(t_m_list *list, t_env *env)
-{
-	t_cmd	*cmd;
-
-	cmd = list->content;
-	if (cmd->flag == 1) //pipe O
-		set_pipe(list, env);
-	else
-		execute_cmd(cmd, env);
-	return (list->next);
-}
-
-void	execute_list(t_m_list *list, t_env *env) //list 실행
+void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 {
 	t_m_list	*cur;
+	int			prev;
 
 	cur = list;
+	prev = 0;
 	while (cur)
 	{
-		cur = execute(cur, env);
+		if (cur->content->flag == 1)
+			create_child(cur, env);
+		else if (prev == 1)
+			create_child(cur, env);
+		else
+		{
+			if (!rd_handler(cur->content))
+				execute_cmd(cur->content, env);
+		}
+		prev = cur->content->flag;
+		if (prev == 0)
+		{
+			dup2(b_stdin, 0);
+			dup2(b_stdout, 1);
+		}
+		cur = cur->next;
 	}
+}
+
+void	execute(t_m_list *list, t_env *env)
+{
+	t_m_list	*cur;
+	int			prev;
+	int stdin_dup;
+	int stdout_dup;
+
+	stdin_dup = dup(0);
+	stdout_dup = dup(1);
+	cur = list;
+	prev = 0;
+	execute_list(list, env, stdin_dup, stdout_dup);
+	dup2(stdin_dup, 0);
+	dup2(stdout_dup, 1);
+	close(stdin_dup);
+	close(stdout_dup);
 }

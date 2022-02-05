@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:10:06 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 15:28:07 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/03 22:47:39 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+
+#include <sys/time.h>
 
 void	show_prompt(t_data *data)
 {
@@ -28,7 +30,7 @@ void	show_prompt(t_data *data)
 		printf("\033[1A");
 		printf("\033[10C");
 		printf(" exit\n");
-		exit(-1);
+		exit(0);
 	}
 	else if (data->cmd_set[0] == '\0')
 	{

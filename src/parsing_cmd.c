@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/02 16:18:17 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/05 01:35:53 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	list = data->lstlast;
 	new_list = (t_m_list *)malloc(sizeof(t_m_list));
 	cmd_data = (t_cmd *)malloc(sizeof(t_cmd));
+	//추가
+	cmd_data->out = 0;
+	if (ft_strrchr(cmd, '>'))
+		cmd_data->out = 1;
 	cmd_data->cmdline = ft_split(cmd, ' ');
 	if (let == '|')
 		cmd_data->flag = 1;
@@ -71,5 +75,7 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
-	execute_list(data->lstlast, data->env);
+	// execute_list(data->lstlast, data->env);
+	execute(data->lstlast, data->env);
+//	execute_cmd(data->lstlast->content, data->env);
 }
