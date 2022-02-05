@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:30:13 by soum              #+#    #+#             */
-/*   Updated: 2022/02/04 23:56:02 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/05 14:31:22 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,35 @@
 void	free_env_list(t_data *data)
 {
 	t_env *env;
+	t_env *tmp_env;
 
 	env = data->env;
+	while (env)
+	{
+		if (env->key)
+			free(env->key);
+		if (env->value)
+			free(env->value);
+		tmp_env = env->next;
+		free(env);
+		env = NULL;
+		env = tmp_env;
+	}
+	env = data->env;
+}
+
+void	free_envp(char **env)
+{
+	int index;
+
+	index = 0;
+	while (env[index])
+	{
+		free(env[index]);
+		index++;
+	}
+	free(env[index]);
+	free(env);
 }
 
 void	free_cmd_data(t_cmd *content)
