@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/04 19:40:08 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/05 01:25:19 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 		else if (prev == 1)
 			create_child(cur, env);
 		else
-			rd_handler(cur->content, env);
-			// execute_cmd(cur->content, env);
+		{
+			if (!rd_handler(cur->content))
+				execute_cmd(cur->content, env);
+		}
 		prev = cur->content->flag;
 		if (prev == 0)
 		{

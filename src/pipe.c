@@ -4,16 +4,18 @@
 void	child(t_m_list *list, t_env *env)
 {
 	t_cmd	*cmd;
+	int		err;
 
 	cmd = list->content;
+	err = rd_handler(cmd);
 	close(cmd->fd[0]);
-	if (cmd->flag == 1)
+	if (cmd->flag == 1 && !cmd->out)
 	{
 		dup2(cmd->fd[1], STDOUT_FILENO);
 		close(cmd->fd[1]);
 	}
-	execute_cmd(cmd, env);
-	// rd_handler(cmd, env);
+	if (!err)
+		execute_cmd(cmd, env);
 	exit(0);
 }
 

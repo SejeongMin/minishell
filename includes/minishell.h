@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/04 19:35:47 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/05 01:34:12 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_cmd
 	int		flag;
 	char	quote;
 	int		fd[2];
+	int		out;
 }	t_cmd;
 
 typedef struct s_env
@@ -99,6 +100,6 @@ void		create_child(t_m_list *list, t_env *env);
 void		child(t_m_list *list, t_env *env);
 
 //redirection.c
-void	rd_handler(t_cmd *cmd, t_env *env);
+int	rd_handler(t_cmd *cmd);
 
 #endif

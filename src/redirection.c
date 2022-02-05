@@ -1,7 +1,7 @@
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-void	rd_in(char *file)
+int	rd_in(char *file)
 {
 	int	newfd;
 
@@ -9,14 +9,15 @@ void	rd_in(char *file)
 	if (newfd < 1)
 	{
 		printf("minishell: %s: %s\n", file, strerror(errno));
-		return ;
+		return (1);
 		//free
 	}
 	dup2(newfd, 0);
 	close(newfd);
+	return (0);
 }
 
-void	rd_out(char *file)
+int	rd_out(char *file)
 {
 	int	newfd;
 
@@ -24,14 +25,15 @@ void	rd_out(char *file)
 	if (newfd < 1)
 	{
 		printf("minishell: %s: %s\n", file, strerror(errno));
-		return ;
+		return (1);
 		//free
 	}
 	dup2(newfd, 1);
 	close(newfd);
+	return (0);
 }
 
-void	rd_double_out(char *file)
+int	rd_double_out(char *file)
 {
 	int	newfd;
 
@@ -39,11 +41,12 @@ void	rd_double_out(char *file)
 	if (newfd < 1)
 	{
 		printf("minishell: %s: %s\n", file, strerror(errno));
-		return ;
+		return (1);
 		//free
 	}
 	dup2(newfd, 1);
 	close(newfd);
+	return (0);
 }
 
 void	heredoc(char *end)
@@ -61,16 +64,16 @@ void	heredoc(char *end)
 	}
 }
 
-void	redirection(char *file, int type)
+int	redirection(char *file, int type)
 {
 	if (type == 1) // <
-		rd_in(file);
+		return (rd_in(file));
 	else if (type == 2) // >
-		rd_out(file);
+		return (rd_out(file));
 	else if (type == 3) // >>
-		rd_double_out(file);
+		return (rd_double_out(file));
 	else
-		return ;
+		return (0);
 	// else
 		// heredoc(cmd, file);
 }
@@ -122,24 +125,26 @@ void	free_cmdline(char **cmdline)
 	free(cmdline);
 }
 
-void	rd_handler(t_cmd *cmd, t_env *env)
+int	rd_handler(t_cmd *cmd)
 {
 	char	**new_cmdline;
 	int		idx;
 	int		new_idx;
 	int		rd_type;
+	int		status;
 
 	idx = 0;
 	new_idx = 0;
+	status = 0;
 	new_cmdline = (char **)malloc(sizeof(char *) * (cmd_cnt(cmd) + 1));
 	while (cmd->cmdline[idx])
 	{
 		rd_type = find_rd_type(cmd->cmdline[idx]);
 		if (rd_type)
 		{
-			printf("rdtype : %d\n", rd_type);
-			redirection(cmd->cmdline[idx + 1], rd_type);
-			idx++;
+			status = redirection(cmd->cmdline[++idx], rd_type);
+			if (status)
+				break ;
 		}
 		else
 		{
@@ -151,6 +156,5 @@ void	rd_handler(t_cmd *cmd, t_env *env)
 	new_cmdline[new_idx] = 0;
 	free_cmdline(cmd->cmdline);
 	cmd->cmdline = new_cmdline;
-	if (!errno)
-		execute_cmd(cmd, env);
+	return (status);
 }
