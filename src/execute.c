@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/05 14:32:05 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/05 17:30:36 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 		prev = cur->content->flag;
 		if (prev == 0)
 		{
-			dup2(b_stdin, 0);
+			if (cur->content->out)
+				dup2(b_stdin, 0);
 			dup2(b_stdout, 1);
 		}
 		cur = cur->next;
