@@ -8,7 +8,7 @@ int	rd_in(char *file)
 	newfd = open(file, O_RDONLY, 0644);
 	if (newfd < 1)
 	{
-		printf("minishell: %s: %s\n", file, strerror(errno));
+		// printf("minishell: %s: %s\n", file, strerror(errno));
 		return (1);
 		//free
 	}
@@ -132,6 +132,7 @@ int	rd_handler(t_cmd *cmd)
 	int		new_idx;
 	int		rd_type;
 	int		status;
+	int		dup_out = dup(1);
 
 	idx = 0;
 	new_idx = 0;
@@ -144,7 +145,11 @@ int	rd_handler(t_cmd *cmd)
 		{
 			status = redirection(cmd->cmdline[++idx], rd_type);
 			if (status)
+			{
+				dup2(dup_out, 1);
+				printf("minishell: %s: %s\n", cmd->cmdline[idx], strerror(errno));
 				break ;
+			}
 		}
 		else
 		{
@@ -156,5 +161,6 @@ int	rd_handler(t_cmd *cmd)
 	new_cmdline[new_idx] = 0;
 	free_cmdline(cmd->cmdline);
 	cmd->cmdline = new_cmdline;
+	close(dup_out);
 	return (status);
 }
