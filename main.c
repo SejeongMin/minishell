@@ -61,7 +61,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			parsing(data);
 			//all_print_list(data);
-			free_cmd_list(data);
+      free_cmd_list(data);
 		}
 		//system("leaks minishell");
 	}
