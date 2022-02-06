@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/02/05 14:45:13 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/05 17:37:55 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			parsing(data);
 			//all_print_list(data);
-      free_cmd_list(data);
+      		free_cmd_list(data);
 		}
 		//system("leaks minishell");
 	}

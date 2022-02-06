@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:52:14 by semin             #+#    #+#             */
-/*   Updated: 2022/02/02 15:24:55 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/06 01:49:53 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	add_env(t_env *env, char *key, char *value)
 	free(envline);
 }
 
-void	change_env(t_env *env, char *key, char *value)
+void	ch_env(t_env *env, char *key, char *value)
 {
 	if (!env)
 	{
@@ -77,9 +77,9 @@ void	ft_chdir(char *dest, t_env *env)
 		printf("minishell: cd: %s: Permission denied\n", dest);
 	else
 	{
-		change_env(find_env("OLDPWD", env), "OLDPWD", find_env("PWD", env)->value);
+		ch_env(find_env("OLDPWD", env), "OLDPWD", find_env("PWD", env)->value);
 		pwd = getcwd(0, 1024);
-		change_env(find_env("PWD", env), "PWD", pwd);
+		ch_env(find_env("PWD", env), "PWD", pwd);
 		free(pwd);
 	}
 }

@@ -19,7 +19,7 @@ void	child(t_m_list *list, t_env *env)
 	exit(0);
 }
 
-void	create_child(t_m_list *list, t_env *env)
+void	create_child(t_m_list *list, t_env *env, int prev)
 {
 	pid_t	pid;
 	int		status;
@@ -29,9 +29,8 @@ void	create_child(t_m_list *list, t_env *env)
 		printf("pipe error");
 		return ;
 	}
-	// if (prev == 1)
-	// 	dup2(STDIN_FILENO, list->content->fd[1]);
-		// dup2(400, STDIN_FILENO);
+	if (prev == 1)
+		dup2(200, STDIN_FILENO);
 	pid = fork();
 	if (pid == 0)
 		child(list, env);
@@ -40,8 +39,7 @@ void	create_child(t_m_list *list, t_env *env)
 		waitpid(pid, &status, 0);
 		close(list->content->fd[1]);
 		if (list->content->flag == 1)
-			dup2(list->content->fd[0], list->next->content->fd[1]);
-			// dup2(list->content->fd[0], 400);
+			dup2(list->content->fd[0], 200);
 		close(list->content->fd[0]);
 	}
 }
