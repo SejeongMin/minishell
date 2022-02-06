@@ -30,6 +30,7 @@ SRCS = main.c \
 	   src/pipe.c \
 	   src/redirection.c \
 	   src/parsing_util.c \
+	   src/util.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a

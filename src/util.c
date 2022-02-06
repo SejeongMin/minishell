@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 18:19:44 by soum              #+#    #+#             */
-/*   Updated: 2022/02/06 22:57:48 by soum             ###   ########.fr       */
+/*   Created: 2022/02/07 00:17:08 by soum              #+#    #+#             */
+/*   Updated: 2022/02/07 00:17:34 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
+#include "../Libft/libft.h"
 
-char	*ft_strdup(const char *s1)
+char *ft_strjoin_free(char *s1, char *s2)
 {
+	size_t	len;
 	char	*tmp;
-	size_t	s1_len;
-	int		index;
+	size_t	index;
 
-	index = 0;
-	s1_len = ft_strlen(s1);
-	tmp = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (tmp == 0)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	while (s1[index])
-	{
-		tmp[index] = *(s1 + index);
-		index++;
-	}
-	tmp[index] = '\0';
+	index = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	tmp = (char *)malloc(sizeof(char) * len + 1);
+	if (tmp == NULL)
+		return (NULL);
+	ft_strlcpy(tmp, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(tmp + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s1);
 	return (tmp);
+
 }
