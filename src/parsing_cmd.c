@@ -6,19 +6,20 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 00:55:21 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 14:10:47 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+#include <stdio.h>
 
 int	key_len(char *str)
 {
 	int	len;
 
 	len = 0;
-	while (*str && *str != '$')
+	while (*str && *str != '$' && *str != ' ' && *str != '"' && *str != '\'')
 	{
 		str++;
 		len++;
@@ -29,34 +30,8 @@ int	key_len(char *str)
 char	*dollar_sign(char *cmdline, t_env *env)
 {
 	char	*new_cmdline;
-	char	let[2];
-	int		index;
-	char	*ret;
-
-	index = 0;
-	let[1] = 0;
-
-	new_cmdline = (char *)malloc(sizeof(char));
-	new_cmdline[0] = '\0';
-	while (cmdline[index])
-	{
-		if (cmdline[index] == '$')
-		{
-			ret = replace_dollar(&cmdline[index], env);
-			new_cmdline = ft_strjoin_free(new_cmdline, ret);
-			free(ret);
-			index += key_len(&cmdline[index + 1]);
-		}
-		else
-		{
-			let[0] = cmdline[index];
-			new_cmdline = ft_strjoin_free(new_cmdline, let);
-		}
-		index++;
-	}
+	new_cmdline = double_quote(cmdline, env);
 	return (new_cmdline);
-	//$USER$USER
-	//p$USER
 }
 
 char	*mixed_quote(char *cmdline, t_env *env)
@@ -76,18 +51,20 @@ char	*double_quote(char *cmdline, t_env *env)
 	char	*new_cmdline;
 	char	let[2];
 	int		index;
-	char	*ret;
 
 	index = 0;
 	let[1] = 0;
 
 	new_cmdline = (char *)malloc(sizeof(char));
 	new_cmdline[0] = '\0';
-	ret = replace_dollar(cmdline, env);
 	while (cmdline[index])
 	{
 		if (cmdline[index] == '$')
-			break ;
+		{
+			if (replace_dollar(&cmdline[index], env))
+				new_cmdline = ft_strjoin_free(new_cmdline, replace_dollar(&cmdline[index], env));
+			index += key_len(&cmdline[index + 1]);
+		}
 		else if (cmdline[index] != '"')
 		{
 			let[0] = cmdline[index];
@@ -95,13 +72,7 @@ char	*double_quote(char *cmdline, t_env *env)
 		}
 		index++;
 	}
-	if (ret)
-	{
-		new_cmdline = ft_strjoin(new_cmdline, ret);
-		free(ret);
-	}
 	return (new_cmdline);
-	//"$USER$USER"
 }
 
 char	*single_quote(char *cmdline)

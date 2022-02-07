@@ -12,7 +12,7 @@ cmd_cnt	redirection.c	/^int	cmd_cnt(t_cmd *cmd)$/;"	f
 cmdline_change	parsing_cmd.c	/^char *cmdline_change(char *cmdline, t_env *env)$/;"	f
 create_child	pipe.c	/^void	create_child(t_m_list *list, t_env *env)$/;"	f
 delete_env	unset.c	/^void	delete_env(t_env **env, char *key)$/;"	f
-dollar_sign	parsing_cmd.c	/^char	*dollar_sign(char *cmdline)$/;"	f
+dollar_sign	parsing_cmd.c	/^char	*dollar_sign(char *cmdline, t_env *env)$/;"	f
 double_quote	parsing_cmd.c	/^char	*double_quote(char *cmdline, t_env *env)$/;"	f
 env_num	env.c	/^int	env_num(t_env *env)$/;"	f
 error_msg	error.c	/^void	error_msg(char *str)$/;"	f
@@ -34,6 +34,7 @@ ft_chdir	cd.c	/^void	ft_chdir(char *dest, t_env *env)$/;"	f
 ft_exit	exit.c	/^void	ft_exit(t_cmd *cmd)$/;"	f
 ft_export	export.c	/^void	ft_export(t_cmd *cmd, t_env *env)$/;"	f
 ft_strcmp	unset.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f
+ft_strjoin_free	util.c	/^char *ft_strjoin_free(char *s1, char *s2)$/;"	f
 ft_unset	unset.c	/^void	ft_unset(t_cmd *cmd, t_env *env)$/;"	f
 get_envlen	env.c	/^int	get_envlen(char **env)$/;"	f
 get_keylen	env_util.c	/^int	get_keylen(char *str)$/;"	f
@@ -41,8 +42,9 @@ heredoc	redirection.c	/^void	heredoc(char *end)$/;"	f
 init_env	env.c	/^t_env	*init_env(char **envp)$/;"	f
 init_struct	init_shell.c	/^void	init_struct(t_data *data, char **envp)$/;"	f
 is_numeric	exit.c	/^int	is_numeric(char *str)$/;"	f
+key_len	parsing_cmd.c	/^int	key_len(char *str)$/;"	f
 make_envp	env.c	/^char	**make_envp(t_env *env)$/;"	f
-mixed_quote	parsing_cmd.c	/^char	*mixed_quote(char *cmdline)$/;"	f
+mixed_quote	parsing_cmd.c	/^char	*mixed_quote(char *cmdline, t_env *env)$/;"	f
 new_env	env.c	/^t_env	*new_env(char *envline)$/;"	f
 parsing	parsing_cmd.c	/^void	parsing(t_data *data)$/;"	f
 parsing_proc	parsing_cmd.c	/^void	parsing_proc(t_data *data, char *tmp)$/;"	f
