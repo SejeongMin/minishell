@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 15:31:22 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:47:56 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	cmd_data->out = 0;
 	if (ft_strrchr(cmd, '>'))
 		cmd_data->out = 1;
-	cmd_data->cmdline = ft_split(cmd, ' ');
+	if (ft_strchr(cmd, '"') || ft_strchr(cmd, '\''))
+		cmd_data->cmdline = quote_split(cmd, ' ');
+	else
+		cmd_data->cmdline = ft_split(cmd, ' ');
 	if (let == '|')
 		cmd_data->flag = 1;
 	else if (let == ';' || let == '\0')
@@ -75,5 +78,6 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
+	reparsing_env(data);
 	execute(data, data->lstlast);
 }

@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 17:38:29 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:46:04 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,21 @@ int			find_rd_type(char *rd);
 
 void		free_env_list(t_data *data);
 void		free_envp(char **envp);
+void        reparsing_env(t_data *data);
+char        *cmdline_change(char *cmdline, t_env *env);
+char        *replace_dollar(char *str, t_env *env);
+int         sep_cnt_quote(char *cmd, char c);
+void        putin(char *cmd, char *cmdline, int from, int i);
+void        sep_cmdline(char *cmd, char c, char **cmdline);
+char        **quote_split(char *cmd, char c);
+char        *double_quote(char *cmdline, t_env *env);
+char        *single_quote(char *cmdline);
+int         get_keylen(char *str);
+char        *dollar_sing(char *cmdline, t_env *env);
+char        *mixed_quote(char *cmdline, t_env *env);
+char        *ft_strjoin_free(char *s1, char *s2);
+int         quote_index(char *cmd, char let, int *index);
+char        *put_in_cmdline(char *cmd, char let, int *i);
+char        *put_in_cmdline_normal(char *cmd, char let, int *i);
 
 #endif
