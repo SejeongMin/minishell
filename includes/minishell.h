@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 00:44:03 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 16:16:13 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		create_child(t_m_list *list, t_env *env);
 void		child(t_m_list *list, t_env *env);
 
 //redirection.c
-int	rd_handler(t_cmd *cmd);
+int			rd_handler(t_cmd *cmd);
 
 void		free_env_list(t_data *data);
 void		free_envp(char **envp);
@@ -117,4 +117,6 @@ int			get_keylen(char *str);
 char		*dollar_sing(char *cmdline, t_env *env);
 char		*mixed_quote(char *cmdline, t_env *env);
 char		*ft_strjoin_free(char *s1, char *s2);
+int			quote_index(char *cmd, char let, int *index);
+char		*put_in_cmdline(char *cmd, char let, int *i);
 #endif

@@ -6,136 +6,12 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 14:10:47 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 15:07:50 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
-#include <stdio.h>
-
-int	key_len(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (*str && *str != '$' && *str != ' ' && *str != '"' && *str != '\'')
-	{
-		str++;
-		len++;
-	}
-	return (len);
-}
-
-char	*dollar_sign(char *cmdline, t_env *env)
-{
-	char	*new_cmdline;
-	new_cmdline = double_quote(cmdline, env);
-	return (new_cmdline);
-}
-
-char	*mixed_quote(char *cmdline, t_env *env)
-{
-	char	*new_cmdline;
-
-	if (ft_strchr(cmdline, '\'') - cmdline < ft_strchr(cmdline, '"') - cmdline)
-		new_cmdline = single_quote(cmdline);
-	else
-		new_cmdline = double_quote(cmdline, env);
-	return (new_cmdline);
-	//"'$USER'"
-}
-
-char	*double_quote(char *cmdline, t_env *env)
-{
-	char	*new_cmdline;
-	char	let[2];
-	int		index;
-
-	index = 0;
-	let[1] = 0;
-
-	new_cmdline = (char *)malloc(sizeof(char));
-	new_cmdline[0] = '\0';
-	while (cmdline[index])
-	{
-		if (cmdline[index] == '$')
-		{
-			if (replace_dollar(&cmdline[index], env))
-				new_cmdline = ft_strjoin_free(new_cmdline, replace_dollar(&cmdline[index], env));
-			index += key_len(&cmdline[index + 1]);
-		}
-		else if (cmdline[index] != '"')
-		{
-			let[0] = cmdline[index];
-			new_cmdline = ft_strjoin_free(new_cmdline, let);
-		}
-		index++;
-	}
-	return (new_cmdline);
-}
-
-char	*single_quote(char *cmdline)
-{
-	char	*new_cmdline;
-	char	let[2];
-	int		index;
-
-	index = 0;
-	let[1] = 0;
-	new_cmdline = (char *)malloc(sizeof(char));
-	new_cmdline[0] = '\0';
-	while (cmdline[index])
-	{
-		if (cmdline[index] != '\'')
-		{
-			let[0] = cmdline[index];
-			new_cmdline = ft_strjoin_free(new_cmdline, let);
-		}
-		index++;
-	}
-	return (new_cmdline);
-}
-
-char *cmdline_change(char *cmdline, t_env *env)
-{
-	char *tmp;
-	(void)env;
-
-	tmp = NULL;
-	if (ft_strchr(cmdline, '\'') && ft_strchr(cmdline, '"'))
-		tmp = mixed_quote(cmdline, env);
-	else if (ft_strchr(cmdline, '"'))
-		tmp = double_quote(cmdline, env);
-	else if (ft_strchr(cmdline, '\''))
-		tmp = single_quote(cmdline);
-	else if (ft_strchr(cmdline, '$'))
-		tmp = dollar_sign(cmdline, env);
-	else
-		return (cmdline);
-	free(cmdline);
-	return (tmp);
-}
-
-void	reparsing_env(t_data *data)
-{
-	t_m_list *list;
-	int		index;
-	char	**cmdline;
-
-	list = data->lstlast;
-	index = 0;
-	while (list)
-	{
-		cmdline = list->content->cmdline;
-		while (cmdline[index])
-		{
-			cmdline[index] = cmdline_change(cmdline[index], data->env);
-			index++;
-		}
-		list = list->next;
-	}
-}
 
 void	put_in_cmd(t_data *data, char *cmd, char let)
 {
@@ -182,8 +58,8 @@ void	parsing_proc(t_data *data, char *tmp)
 	tmp_len = ft_strlen(tmp);
 	while (i <= tmp_len)
 	{
-		if (tmp[i] == '\0' && (tmp[i -1] == ';' || tmp[i -i] == '|'))
-			break;
+		if (tmp[i] == '\0' && (tmp[i - 1] == ';' || tmp[i - i] == '|'))
+			break ;
 		if (tmp[i] == ';' || tmp[i] == '|' || tmp[i] == '\0')
 		{
 			cmd = (char *)malloc(sizeof(char) * (i - j + 1));

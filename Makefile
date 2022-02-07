@@ -31,13 +31,16 @@ SRCS = main.c \
 	   src/redirection.c \
 	   src/parsing_util.c \
 	   src/util.c \
+	   src/reparsing_cmd.c \
+	   src/quote.c \
+	   src/quote_split.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a
 INCLUDES = ./includes/minishell.h
 
 CC = gcc
-CFLAGES = -Wall -Wextra -Werror
+CFLAGES = -Wall -Wextra -Werror -fsanitize=address
 COMFILE_FLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
 OBJ_FLAGS = -I /opt/homebrew/opt/readline/include
 

@@ -6,7 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 CC	Libft/Makefile	/^CC = gcc$/;"	m
 CC	Makefile	/^CC = gcc$/;"	m
-CFLAGES	Makefile	/^CFLAGES = -Wall -Wextra -Werror$/;"	m
+CFLAGES	Makefile	/^CFLAGES = -Wall -Wextra -Werror -fsanitize=address$/;"	m
 CFLAGS	Libft/Makefile	/^CFLAGS = -Wall -Wextra -Werror$/;"	m
 COMFILE_FLAGS	Makefile	/^COMFILE_FLAGS = -lreadline -L \/opt\/homebrew\/opt\/readline\/lib$/;"	m
 INCLUDES	Libft/Makefile	/^INCLUDES = ..\/includes\/libft.h$/;"	m
@@ -33,11 +33,13 @@ child	src/pipe.c	/^void	child(t_m_list *list, t_env *env)$/;"	f
 cmd_cnt	src/redirection.c	/^int	cmd_cnt(t_cmd *cmd)$/;"	f
 cmd_set	includes/minishell.h	/^	char		*cmd_set;$/;"	m	struct:s_data
 cmdline	includes/minishell.h	/^	char	**cmdline;$/;"	m	struct:s_cmd
-cmdline_change	src/parsing_cmd.c	/^char *cmdline_change(char *cmdline, t_env *env)$/;"	f
+cmdline_change	src/reparsing_cmd.c	/^char	*cmdline_change(char *cmdline, t_env *env)$/;"	f
 content	Libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
 content	includes/minishell.h	/^	struct s_cmd	*content;$/;"	m	struct:s_m_list	typeref:struct:s_m_list::s_cmd
 create_child	src/pipe.c	/^void	create_child(t_m_list *list, t_env *env)$/;"	f
 delete_env	src/unset.c	/^void	delete_env(t_env **env, char *key)$/;"	f
+dollar_sign	src/quote.c	/^char	*dollar_sign(char *cmdline, t_env *env)$/;"	f
+double_quote	src/quote.c	/^char	*double_quote(char *cmdline, t_env *env)$/;"	f
 env	includes/minishell.h	/^	t_env		*env;$/;"	m	struct:s_data
 env_num	src/env.c	/^int	env_num(t_env *env)$/;"	f
 error_msg	src/error.c	/^void	error_msg(char *str)$/;"	f
@@ -102,6 +104,7 @@ ft_strchr	Libft/ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
 ft_strcmp	src/unset.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f
 ft_strdup	Libft/ft_strdup.c	/^char	*ft_strdup(const char *s1)$/;"	f
 ft_strjoin	Libft/ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f
+ft_strjoin_free	src/util.c	/^char *ft_strjoin_free(char *s1, char *s2)$/;"	f
 ft_strlcat	Libft/ft_strlcat.c	/^size_t	ft_strlcat(char *dst, const char *src, size_t detsize)$/;"	f
 ft_strlcpy	Libft/ft_strlcpy.c	/^size_t	ft_strlcpy(char *dst, const char *src, size_t detsize)$/;"	f
 ft_strlen	Libft/ft_strlen.c	/^size_t	ft_strlen(const char *s)$/;"	f
@@ -121,9 +124,11 @@ init_env	src/env.c	/^t_env	*init_env(char **envp)$/;"	f
 init_struct	src/init_shell.c	/^void	init_struct(t_data *data, char **envp)$/;"	f
 is_numeric	src/exit.c	/^int	is_numeric(char *str)$/;"	f
 key	includes/minishell.h	/^	char			*key;$/;"	m	struct:s_env
+key_len	src/quote.c	/^int	key_len(char *str)$/;"	f
 lstlast	includes/minishell.h	/^	t_m_list	*lstlast;$/;"	m	struct:s_data
 main	main.c	/^int	main(int ac, char **av, char **envp)$/;"	f
 make_envp	src/env.c	/^char	**make_envp(t_env *env)$/;"	f
+mixed_quote	src/quote.c	/^char	*mixed_quote(char *cmdline, t_env *env)$/;"	f
 new_env	src/env.c	/^t_env	*new_env(char *envline)$/;"	f
 next	Libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
 next	includes/minishell.h	/^	struct s_env	*next;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
@@ -133,27 +138,30 @@ parsing	src/parsing_cmd.c	/^void	parsing(t_data *data)$/;"	f
 parsing_proc	src/parsing_cmd.c	/^void	parsing_proc(t_data *data, char *tmp)$/;"	f
 print_export	src/export.c	/^void	print_export(t_env *env)$/;"	f
 put_in_cmd	src/parsing_cmd.c	/^void	put_in_cmd(t_data *data, char *cmd, char let)$/;"	f
-putin	src/parsing_cmd.c	/^void	putin(char *cmd, char *cmdline, int from, int i)$/;"	f
+put_in_cmdline	src/parsing_util.c	/^char	*put_in_cmdline(char *cmd, char let, int *i)$/;"	f
+putin	src/quote_split.c	/^void	putin(char *cmd, char *cmdline, int from, int i)$/;"	f
 quote	includes/minishell.h	/^	char	quote;$/;"	m	struct:s_cmd
 quote_error	src/check_cmd.c	/^int	quote_error(char *str)$/;"	f
-quote_split	src/parsing_cmd.c	/^char	**quote_split(char *cmd, char c)$/;"	f
+quote_index	src/parsing_util.c	/^int	quote_index(char *cmd, char let, int *index)$/;"	f
+quote_split	src/quote_split.c	/^char	**quote_split(char *cmd, char c)$/;"	f
 rd_double_out	src/redirection.c	/^int	rd_double_out(char *file)$/;"	f
 rd_handler	src/redirection.c	/^int	rd_handler(t_cmd *cmd)$/;"	f
 rd_in	src/redirection.c	/^int	rd_in(char *file)$/;"	f
 rd_out	src/redirection.c	/^int	rd_out(char *file)$/;"	f
 redirection	src/redirection.c	/^int	redirection(char *file, int type)$/;"	f
-reparsing_env	src/parsing_cmd.c	/^void	reparsing_env(t_data *data)$/;"	f
+reparsing_env	src/reparsing_cmd.c	/^void	reparsing_env(t_data *data)$/;"	f
 replace_dollar	src/env_util.c	/^char	*replace_dollar(char *str, t_env *env)$/;"	f
 s_cmd	includes/minishell.h	/^typedef struct s_cmd$/;"	s
 s_data	includes/minishell.h	/^typedef struct s_data$/;"	s
 s_env	includes/minishell.h	/^typedef struct s_env$/;"	s
 s_list	Libft/libft.h	/^typedef struct s_list$/;"	s
 s_m_list	includes/minishell.h	/^typedef struct s_m_list$/;"	s
-sep_cmdline	src/parsing_cmd.c	/^void	sep_cmdline(char *cmd, char c, char **cmdline)$/;"	f
-sep_cnt_quote	src/parsing_cmd.c	/^int		sep_cnt_quote(char *cmd, char c)$/;"	f
+sep_cmdline	src/quote_split.c	/^void	sep_cmdline(char *cmd, char c, char **cmdline)$/;"	f
+sep_cnt_quote	src/quote_split.c	/^int	sep_cnt_quote(char *cmd, char c)$/;"	f
 setting_signal	src/init_shell.c	/^void	setting_signal(void)$/;"	f
 show_prompt	src/prompt.c	/^void	show_prompt(t_data *data)$/;"	f
 sig_handler	src/init_shell.c	/^void	sig_handler(int signal)$/;"	f
+single_quote	src/quote.c	/^char	*single_quote(char *cmdline)$/;"	f
 status	includes/minishell.h	/^	int			status;$/;"	m	struct:s_data
 t_cmd	includes/minishell.h	/^}	t_cmd;$/;"	t	typeref:struct:s_cmd
 t_data	includes/minishell.h	/^}	t_data;$/;"	t	typeref:struct:s_data
