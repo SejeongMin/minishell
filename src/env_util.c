@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 15:45:17 by semin             #+#    #+#             */
-/*   Updated: 2022/02/07 21:03:39 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 21:26:33 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*replace_dollar(char *str, t_env *env)
 	c = str;
 	while (*c && *c != '$')
 		c++;
-	if (*c + 1 == '%')
+	if (*(c + 1) == '?')
 		return (ft_itoa(g_status));
 	key_len = get_keylen(c + 1);
 	key = ft_substr(str, c - str + 1, key_len);
