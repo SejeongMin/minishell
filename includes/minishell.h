@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 16:16:13 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 20:21:33 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ char		*mixed_quote(char *cmdline, t_env *env);
 char		*ft_strjoin_free(char *s1, char *s2);
 int			quote_index(char *cmd, char let, int *index);
 char		*put_in_cmdline(char *cmd, char let, int *i);
+char		*put_in_cmdline_normal(char *cmd, char let, int *i);
 #endif

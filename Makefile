@@ -40,7 +40,7 @@ LIBFT_LIB = Libft/libft.a
 INCLUDES = ./includes/minishell.h
 
 CC = gcc
-CFLAGES = -Wall -Wextra -Werror -fsanitize=address
+CFLAGES = -Wall -Wextra -Werror
 COMFILE_FLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
 OBJ_FLAGS = -I /opt/homebrew/opt/readline/include
 

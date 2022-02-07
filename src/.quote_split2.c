@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 18:07:20 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 20:24:18 by soum             ###   ########.fr       */
+/*   Created: 2022/02/07 15:44:39 by soum              #+#    #+#             */
+/*   Updated: 2022/02/07 17:07:54 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,47 @@ int	sep_cnt_quote(char *cmd, char c)
 	while (cmd[index])
 	{
 		if (cmd[index] == '"')
-			cnt += quote_index(cmd, '"', &index);
-		else if (cmd[index] == '\'')
-			cnt += quote_index(cmd, '\'', &index);
-		else if (cmd[index] != c)
-			cnt += quote_index(cmd, c, &index);
-		if (cmd[index] == ' ')
+		{
+			cnt++;
+			index = quote_index(cmd, '"', index);
+			printf("cmd : %c\n", cmd[index]);
+		}
+		/*
+		{
 			index++;
+			cnt++;
+			while (cmd[index] && cmd[index] != '"')
+				index++;
+		}
+		*/
+		else if (cmd[index] == '\'')
+		{
+			cnt++;
+			index = quote_index(cmd, '\'', index);
+		}
+		/*
+		{
+			index++;
+			cnt++;
+			while (cmd[index] && cmd[index] != '\'')
+				index++;
+		}
+		*/
+		else if (cmd[index] != c)
+		{
+			cnt++;
+			index = quote_index(cmd, c, index);
+			printf("cmd : %c\n", cmd[index]);
+		}
+		/*
+		{
+			index++;
+			cnt++;
+			while (cmd[index] && cmd[index] != c)
+				index++;
+		}
+		*/
+		index++;
 	}
 	return (cnt);
 }
@@ -57,16 +91,42 @@ void	sep_cmdline(char *cmd, char c, char **cmdline)
 	index = 0;
 	i = 0;
 	from = 0;
-	while (i < (int)ft_strlen(cmd))
+	while (cmd[i])
 	{
 		if (cmd[i] == '"')
-			cmdline[index++] = put_in_cmdline(cmd, '"', &i);
+		{
+			cmdline[index] = put_in_cmdline(&cmd[i], '"');
+			while (cmd[i] && cmd[i] != ' ')
+				i++;
+			index++;
+		}
 		else if (cmd[i] == '\'')
-			cmdline[index++] = put_in_cmdline(cmd, '\'', &i);
+		{
+			cmdline[index] = put_in_cmdline(&cmd[i], '\'');
+			while (cmd[i] && cmd[i] != ' ')
+				i++;
+			index++;
+		}
 		else if (cmd[i] != c)
-			cmdline[index++] = put_in_cmdline_normal(cmd, c, &i);
-		if (cmd[i] == ' ')
+		{
+			cmdline[index] = put_in_cmdline(&cmd[i], c);
+			while (cmd[i] && cmd[i] != ' ')
+				i++;
+			index++;
+		}
+		/*
+		if (cmd[i] == '"' || cmd[i] == '\'' || cmd[i] != c)
+		{
 			i++;
+			from = i - 1;
+			while (cmd[i] && cmd[i] != c)
+				i++;
+			cmdline[index] = (char *)malloc((i - from + 1) * sizeof(char));
+			putin(cmd, cmdline[index], from, i + 1);
+			index++;
+		}
+		*/
+		i++;
 	}
 }
 
