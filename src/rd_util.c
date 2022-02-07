@@ -62,3 +62,17 @@ void	heredoc(char *end)
 	}
 	close(newfd);
 }
+
+int	find_rd_type(char *rd)
+{
+	if (!ft_strcmp(rd, "<"))
+		return (1);
+	else if (!ft_strcmp(rd, ">"))
+		return (2);
+	else if (!ft_strcmp(rd, ">>"))
+		return (3);
+	else if (!ft_strcmp(rd, "<<"))
+		return (4);
+	else
+		return (0);
+}

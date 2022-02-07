@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/07 17:36:44 by semin             #+#    #+#             */
+/*   Updated: 2022/02/07 17:39:34 by semin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
@@ -5,6 +17,8 @@ int	redirection(char *file, int type, int dup_out, int out)
 {
 	int	backup;
 
+	if (!file)
+		return (-1);
 	backup = dup(1);
 	if (type == 1)
 		return (rd_in(file));
@@ -45,18 +59,18 @@ int	cmd_cnt(t_cmd *cmd)
 	return (idx - (ret * 2));
 }
 
-int	find_rd_type(char *rd)
+void	print_rd_error(t_cmd *cmd, int status, char *cmdtype)
 {
-	if (!ft_strcmp(rd, "<"))
-		return (1);
-	else if (!ft_strcmp(rd, ">"))
-		return (2);
-	else if (!ft_strcmp(rd, ">>"))
-		return (3);
-	else if (!ft_strcmp(rd, "<<"))
-		return (4);
+	if (status == -1)
+	{
+		if (cmd->flag == 0)
+			printf("minishell: syntax error near unexpected token `newline'\n");
+		else
+			printf("minishell: syntax error near unexpected token `|'\n");
+	}
 	else
-		return (0);
+		printf("minishell: %s: %s\n", cmdtype, strerror(errno));
+	g_status = 258;
 }
 
 int	redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out)
@@ -74,10 +88,10 @@ int	redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out)
 		if (rd_type)
 		{
 			status = redirection(cmdline[++idx], rd_type, dup_out, cmd->out);
-			if (status && rd_type == 1)
+			if (status == -1 || (status && rd_type == 1))
 			{
 				dup2(dup_out, 1);
-				printf("minishell: %s: %s\n", cmdline[idx], strerror(errno));
+				print_rd_error(cmd, status, cmdline[idx]);
 				break ;
 			}
 		}

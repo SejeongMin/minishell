@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 15:37:56 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 17:38:29 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ void		create_child(t_m_list *list, t_data *data, int prev);
 void		child(t_m_list *list, t_data *data);
 
 //redirection.c
-int	rd_handler(t_cmd *cmd);
+int			rd_handler(t_cmd *cmd);
 
 //rd_util.c
 int			rd_in(char *file);
 int			rd_out(char *file);
 int			rd_double_out(char *file);
 void		heredoc(char *end);
+int			find_rd_type(char *rd);
 
 void		free_env_list(t_data *data);
 void		free_envp(char **envp);
