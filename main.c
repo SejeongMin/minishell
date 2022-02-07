@@ -6,12 +6,14 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 20:30:29 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 17:44:18 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
 #include "./Libft/libft.h"
+
+int	g_status = 0;
 
 void all_print_list(t_data *data)
 {
@@ -61,9 +63,8 @@ int	main(int ac, char **av, char **envp)
 		{
 			parsing(data);
 			//all_print_list(data);
+      		free_cmd_list(data);
 		}
-		free_cmd_list(data);
-		//system("leaks minishell");
 	}
 	free_env_list(data);
 	return (0);

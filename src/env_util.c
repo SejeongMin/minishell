@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 15:45:17 by semin             #+#    #+#             */
-/*   Updated: 2022/02/07 15:00:18 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 21:26:33 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	get_keylen(char *str)
 	int	ret;
 
 	ret = 0;
-	while (*str && *str != '\'' && *str != '"' && *str != ' ' && *str != '$')
+	while (*str && *str != '\'' && *str != '"' && *str != ' ' \
+			&& *str != '$' && (*str == '_' || ft_isalnum(*str)))
 	{
 		str++;
 		ret++;
@@ -37,8 +38,8 @@ char	*replace_dollar(char *str, t_env *env)
 	c = str;
 	while (*c && *c != '$')
 		c++;
-	//if (*c == '?')
-	//	return (ft_itoa(g_status));
+	if (*(c + 1) == '?')
+		return (ft_itoa(g_status));
 	key_len = get_keylen(c + 1);
 	key = ft_substr(str, c - str + 1, key_len);
 	found_env = find_env(key, env);

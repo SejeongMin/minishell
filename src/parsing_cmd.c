@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 15:07:50 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/07 20:47:56 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	parsing_proc(t_data *data, char *tmp)
 	tmp_len = ft_strlen(tmp);
 	while (i <= tmp_len)
 	{
-		if (tmp[i] == '\0' && (tmp[i - 1] == ';' || tmp[i - i] == '|'))
-			break ;
+		if (tmp[i] == '\0' && (tmp[i -1] == ';' || tmp[i -i] == '|'))
+			break;
 		if (tmp[i] == ';' || tmp[i] == '|' || tmp[i] == '\0')
 		{
 			cmd = (char *)malloc(sizeof(char) * (i - j + 1));
@@ -79,7 +79,5 @@ void	parsing(t_data *data)
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
 	reparsing_env(data);
-	// execute_list(data->lstlast, data->env);
-	execute(data->lstlast, data->env);
-//	execute_cmd(data->lstlast->content, data->env);
+	execute(data, data->lstlast);
 }
