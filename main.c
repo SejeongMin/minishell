@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:54:17 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 16:34:32 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 17:44:18 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main(int ac, char **av, char **envp)
 			//all_print_list(data);
       		free_cmd_list(data);
 		}
-		printf("g_status = %d\n", g_status);
 	}
 	free_env_list(data);
 	return (0);
