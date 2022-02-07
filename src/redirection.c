@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:36:44 by semin             #+#    #+#             */
-/*   Updated: 2022/02/07 17:39:34 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/08 00:43:58 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ void	print_rd_error(t_cmd *cmd, int status, char *cmdtype)
 			printf("minishell: syntax error near unexpected token `newline'\n");
 		else
 			printf("minishell: syntax error near unexpected token `|'\n");
+		g_status = 258;
 	}
 	else
+	{
 		printf("minishell: %s: %s\n", cmdtype, strerror(errno));
-	g_status = 258;
+		g_status = 1;
+	}
 }
 
 int	redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out)
