@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/07 15:38:06 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 17:50:57 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exec_extern(t_cmd *cmd, char **env)
 	command[4] = ft_strjoin("/sbin/", cmd->cmdline[0]);
 	command[5] = 0;
 	i = 0;
+	execve(cmd->cmdline[0], cmd->cmdline, env);
 	while (i < 5)
 	{
 		execve(command[i], cmd->cmdline, env);

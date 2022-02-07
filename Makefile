@@ -26,7 +26,6 @@ SRCS = main.c \
 	   src/export.c \
 	   src/exit.c \
 	   src/cd.c \
-	   src/echo.c \
 	   src/pipe.c \
 	   src/redirection.c \
 	   src/rd_util.c \
