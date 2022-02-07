@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/05 01:35:53 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 15:31:22 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,5 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
-	// execute_list(data->lstlast, data->env);
-	execute(data->lstlast, data->env);
-//	execute_cmd(data->lstlast->content, data->env);
+	execute(data, data->lstlast);
 }

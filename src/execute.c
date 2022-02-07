@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/05 17:30:36 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 15:38:06 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	exec_extern(t_cmd *cmd, char **env)
 	}
 	printf("minishell: %s: command not found\n", cmd->cmdline[0]);
 	exit(127);
-	// exit 정보 저장
 }
 
 void	execute_extern(t_cmd *cmd, char **env)
@@ -44,36 +43,31 @@ void	execute_extern(t_cmd *cmd, char **env)
 	if (pid < 0)
 		exit(errno);
 	if (pid == 0)
-	{
 		exec_extern(cmd, env);
-		// exit status 필요
-	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		// printf("status: %d\n", status >> 9);
-		// env free
+		g_status = status >> 8;
 		free_envp(env);
 	}
 }
 
-void	execute_cmd(t_cmd *cmd, t_env *env)
+void	execute_cmd(t_data *data, t_cmd *cmd, t_env *env, int flag)
 {
+	g_status = 0;
 	if (!ft_strcmp(cmd->cmdline[0], "export"))
 		ft_export(cmd, env);
-	// else if (!ft_strcmp(cmd->cmdline[0], "echo"))
-	// 	printf("echo\n");
 	else if (!ft_strcmp(cmd->cmdline[0], "cd"))
 		ft_cd(cmd, env);
 	else if (!ft_strcmp(cmd->cmdline[0], "unset"))
-		ft_unset(cmd, env);
+		ft_unset(cmd, env, data);
 	else if (!ft_strcmp(cmd->cmdline[0], "exit"))
-		ft_exit(cmd);
+		ft_exit(cmd, flag, data);
 	else
 		execute_extern(cmd, make_envp(env));
 }
 
-void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
+void	execute_list(t_m_list *list, t_data *data, int b_stdin, int b_stdout)
 {
 	t_m_list	*cur;
 	int			prev;
@@ -83,13 +77,13 @@ void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 	while (cur)
 	{
 		if (cur->content->flag == 1)
-			create_child(cur, env);
+			create_child(cur, data, prev);
 		else if (prev == 1)
-			create_child(cur, env);
+			create_child(cur, data, prev);
 		else
 		{
 			if (!rd_handler(cur->content))
-				execute_cmd(cur->content, env);
+				execute_cmd(data, cur->content, data->env, 0);
 		}
 		prev = cur->content->flag;
 		if (prev == 0)
@@ -102,18 +96,14 @@ void	execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout)
 	}
 }
 
-void	execute(t_m_list *list, t_env *env)
+void	execute(t_data *data, t_m_list *list)
 {
-	t_m_list	*cur;
-	int			prev;
-	int stdin_dup;
-	int stdout_dup;
+	int			stdin_dup;
+	int			stdout_dup;
 
 	stdin_dup = dup(0);
 	stdout_dup = dup(1);
-	cur = list;
-	prev = 0;
-	execute_list(list, env, stdin_dup, stdout_dup);
+	execute_list(list, data, stdin_dup, stdout_dup);
 	dup2(stdin_dup, 0);
 	dup2(stdout_dup, 1);
 	close(stdin_dup);
