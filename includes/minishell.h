@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/06 01:33:01 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 15:37:56 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_data
 
 }	t_data;
 
+extern int	g_status;
+
 //prompt.c
 void		show_prompt(t_data *data);
 //init_shell.c
@@ -76,7 +78,7 @@ void		free_cmd_list(t_data *data);
 //env.c
 t_env		*init_env(char **envp);
 void		ft_export(t_cmd *cmd, t_env *env);
-void		ft_unset(t_cmd *cmd, t_env *env);
+void		ft_unset(t_cmd *cmd, t_env *env, t_data *data);
 
 char		**make_envp(t_env *env);
 
@@ -86,18 +88,19 @@ void		ft_export(t_cmd *cmd, t_env *env);
 
 t_env		*new_env(char *envline);
 
-void		ft_exit(t_cmd *cmd);
+void		ft_exit(t_cmd *cmd, int flag, t_data *data);
 
 void		ft_cd(t_cmd *cmd, t_env *env);
 
 t_env		*find_env(char *key, t_env *env);
 // execute.c
-void		execute(t_m_list *list, t_env *env);
-void		execute_cmd(t_cmd *cmd, t_env *env);
-void		execute_list(t_m_list *list, t_env *env, int b_stdin, int b_stdout);
+void		execute(t_data *data, t_m_list *list);
+
+void		execute_cmd(t_data *data, t_cmd *cmd, t_env *env, int flag);
+void		execute_list(t_m_list *list, t_data *data, int b_stdin, int b_stdout);
 //pipe.c
-void		create_child(t_m_list *list, t_env *env, int prev);
-void		child(t_m_list *list, t_env *env);
+void		create_child(t_m_list *list, t_data *data, int prev);
+void		child(t_m_list *list, t_data *data);
 
 //redirection.c
 int	rd_handler(t_cmd *cmd);

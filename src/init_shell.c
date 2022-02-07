@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 01:12:29 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 14:51:49 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	init_struct(t_data *data, char **envp)
 {
+	// g_status = 0;
 	data->lstlast = NULL;
 	data->env = init_env(envp);
 	setting_signal();

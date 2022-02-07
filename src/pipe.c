@@ -1,7 +1,7 @@
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-void	child(t_m_list *list, t_env *env)
+void	child(t_m_list *list, t_data *data)
 {
 	t_cmd	*cmd;
 	int		err;
@@ -15,11 +15,11 @@ void	child(t_m_list *list, t_env *env)
 		close(cmd->fd[1]);
 	}
 	if (!err)
-		execute_cmd(cmd, env);
-	exit(0);
+		execute_cmd(data, cmd, data->env, 1);
+	exit(g_status);
 }
 
-void	create_child(t_m_list *list, t_env *env, int prev)
+void	create_child(t_m_list *list, t_data *data, int prev)
 {
 	pid_t	pid;
 	int		status;
@@ -33,10 +33,11 @@ void	create_child(t_m_list *list, t_env *env, int prev)
 		dup2(200, STDIN_FILENO);
 	pid = fork();
 	if (pid == 0)
-		child(list, env);
+		child(list, data);
 	else
 	{
 		waitpid(pid, &status, 0);
+		g_status = status >> 8;
 		close(list->content->fd[1]);
 		if (list->content->flag == 1)
 			dup2(list->content->fd[0], 200);

@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:52:14 by semin             #+#    #+#             */
-/*   Updated: 2022/02/06 01:49:53 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/07 15:04:18 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	struct stat	filestat;
 	int			stat_ret;
 
+	g_status = 0;
 	if (!cmd->cmdline[1] || !ft_strcmp(cmd->cmdline[1], "~"))
 		chdir(find_env("HOME", env)->value);
 	else if (!ft_strcmp("-", cmd->cmdline[1]))
@@ -97,10 +98,16 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	{
 		stat_ret = stat(cmd->cmdline[1], &filestat);
 		if (stat_ret == -1)
+		{
 			printf("minishell: cd: %s: No such file or directory\n", \
 					cmd->cmdline[1]);
+			g_status = 1;
+		}
 		else if (!S_ISDIR(filestat.st_mode))
+		{
 			printf("minishell: cd: %s: Not a directory\n", cmd->cmdline[1]);
+			g_status = 1;
+		}
 		else
 			ft_chdir(cmd->cmdline[1], env);
 	}
