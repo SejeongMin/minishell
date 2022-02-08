@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 20:46:04 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 15:33:17 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ char        *ft_strjoin_free(char *s1, char *s2);
 int         quote_index(char *cmd, char let, int *index);
 char        *put_in_cmdline(char *cmd, char let, int *i);
 char        *put_in_cmdline_normal(char *cmd, char let, int *i);
-
+void		syntax_error_msg(char let);
+int			pipe_error_check(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:00:49 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 19:41:15 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 15:32:04 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	reparsing_env(t_data *data)
 	char		**cmdline;
 
 	list = data->lstlast;
-	index = 0;
 	while (list)
 	{
 		cmdline = list->content->cmdline;
+		index = 0;
 		while (cmdline[index])
 		{
 			cmdline[index] = cmdline_change(cmdline[index], data->env);

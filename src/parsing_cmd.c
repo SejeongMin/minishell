@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 20:47:56 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 15:30:56 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,21 @@ void	parsing_proc(t_data *data, char *tmp)
 	int		i;
 	int		j;
 	char	*cmd;
-	int		tmp_len;
 
 	i = 0;
 	j = 0;
-	tmp_len = ft_strlen(tmp);
-	while (i <= tmp_len)
+	while (tmp[i])
 	{
+		while (tmp[i] && tmp[i] != ';' && tmp[i] != '|')
+			i++;
+		cmd = (char *)malloc(sizeof(char) *(i - j + 1));
+		ft_strlcpy(cmd, tmp + j, i - j + 1);
+		j = i + 1;
+		put_in_cmd(data, cmd, tmp[i]);
+		free(cmd);
+		if (tmp[i])
+			i++;
+		/*
 		if (tmp[i] == '\0' && (tmp[i -1] == ';' || tmp[i -i] == '|'))
 			break;
 		if (tmp[i] == ';' || tmp[i] == '|' || tmp[i] == '\0')
@@ -69,6 +77,7 @@ void	parsing_proc(t_data *data, char *tmp)
 			free(cmd);
 		}
 		i++;
+		*/
 	}
 }
 
@@ -78,6 +87,8 @@ void	parsing(t_data *data)
 
 	tmp = data->cmd_set;
 	parsing_proc(data, tmp);
+	if (pipe_error_check(data))
+		return ;
 	reparsing_env(data);
 	execute(data, data->lstlast);
 }
