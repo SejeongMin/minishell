@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 20:25:03 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 18:36:27 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	quote_index(char *cmd, char let, int *index)
 {
+	(*index)++;
 	while (cmd[*index] && cmd[*index] != let)
 		(*index)++;
 	while (cmd[*index] && cmd[*index] != ' ')

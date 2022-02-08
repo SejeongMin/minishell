@@ -6,12 +6,12 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:11:48 by soum              #+#    #+#             */
-/*   Updated: 2021/05/28 20:46:22 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 17:20:17 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
@@ -26,4 +26,26 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	return ((char *)(s + i));
+}
+*/
+#include "libft.h"
+
+char            *ft_strchr(const char *s, int c)
+{
+        size_t  index;
+
+        index = 0;
+        while (s[index] != '\0')
+        {
+                if ((unsigned char)c == s[index])
+                {
+                        return ((char*)(&s[index]));
+                }
+                index++;
+        }
+        if ((unsigned char)c == s[index])
+        {
+                return ((char*)(&s[index]));
+        }
+        return (NULL);
 }

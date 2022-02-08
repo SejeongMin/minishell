@@ -136,6 +136,8 @@ next	includes/minishell.h	/^	struct s_m_list	*next;$/;"	m	struct:s_m_list	typere
 out	includes/minishell.h	/^	int		out;$/;"	m	struct:s_cmd
 parsing	src/parsing_cmd.c	/^void	parsing(t_data *data)$/;"	f
 parsing_proc	src/parsing_cmd.c	/^void	parsing_proc(t_data *data, char *tmp)$/;"	f
+pipe_error_check	src/check_cmd.c	/^int pipe_error_check(t_data *data)$/;"	f
+pipe_error_check2	src/check_cmd.c	/^int pipe_error_check2(t_m_list *tmp, int flag)$/;"	f
 print_export	src/export.c	/^void	print_export(t_env *env)$/;"	f
 print_not_valid	src/export.c	/^void	print_not_valid(char *cmd, char *str)$/;"	f
 print_rd_error	src/redirection.c	/^void	print_rd_error(t_cmd *cmd, int status, char *cmdtype)$/;"	f
@@ -146,6 +148,7 @@ putin	src/quote_split.c	/^void	putin(char *cmd, char *cmdline, int from, int i)$
 quote	includes/minishell.h	/^	char	quote;$/;"	m	struct:s_cmd
 quote_error	src/check_cmd.c	/^int	quote_error(char *str)$/;"	f
 quote_index	src/parsing_util.c	/^int	quote_index(char *cmd, char let, int *index)$/;"	f
+quote_parsing	src/quote_parsing.c	/^void	quote_parsing(t_data *data, char *tmp)$/;"	f
 quote_split	src/quote_split.c	/^char	**quote_split(char *cmd, char c)$/;"	f
 rd_double_out	src/rd_util.c	/^int	rd_double_out(char *file)$/;"	f
 rd_handler	src/redirection.c	/^int	rd_handler(t_cmd *cmd)$/;"	f
@@ -168,6 +171,7 @@ sigint_handler	src/init_shell.c	/^void	sigint_handler(int signal)$/;"	f
 sigquit_handler	src/init_shell.c	/^void	sigquit_handler(int signal)$/;"	f
 single_quote	src/quote.c	/^char	*single_quote(char *cmdline)$/;"	f
 status	includes/minishell.h	/^	int			status;$/;"	m	struct:s_data
+syntax_error_msg	src/error.c	/^void	syntax_error_msg(char let)$/;"	f
 t_cmd	includes/minishell.h	/^}	t_cmd;$/;"	t	typeref:struct:s_cmd
 t_data	includes/minishell.h	/^}	t_data;$/;"	t	typeref:struct:s_data
 t_env	includes/minishell.h	/^}	t_env;$/;"	t	typeref:struct:s_env
