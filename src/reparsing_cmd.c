@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:00:49 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 15:32:04 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 18:21:15 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char	*cmdline_change(char *cmdline, t_env *env)
 	else
 		return (cmdline);
 	free(cmdline);
+	cmdline = NULL;
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:41:40 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 15:28:01 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 17:50:50 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int	check_cmd(t_data *data)
 	str = data->cmd_set;
 	if (str == NULL)
 		return (1);
-	if (two_time_error(str) == 1)
-		return (1);
+//	if (two_time_error(str) == 1)
+//		return (1);
 	if (quote_error(str) == 1)
 	{
 		error_msg("shell : quote_error\n");

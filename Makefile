@@ -34,6 +34,7 @@ SRCS = main.c \
 	   src/reparsing_cmd.c \
 	   src/quote.c \
 	   src/quote_split.c \
+	   src/quote_parsing.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a

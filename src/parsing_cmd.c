@@ -6,12 +6,13 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 15:30:56 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 18:44:03 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+#include <string.h>
 
 void	put_in_cmd(t_data *data, char *cmd, char let)
 {
@@ -57,7 +58,14 @@ void	parsing_proc(t_data *data, char *tmp)
 	while (tmp[i])
 	{
 		while (tmp[i] && tmp[i] != ';' && tmp[i] != '|')
-			i++;
+		{
+			if (tmp[i] == '"')
+				i = ft_strchr(&tmp[i + 1], '"') - tmp + 1;
+			else if (tmp[i] == '\'')
+				i = ft_strchr(&tmp[i + 1] , '\'') - tmp + 1;
+			else
+				i++;
+		}
 		cmd = (char *)malloc(sizeof(char) *(i - j + 1));
 		ft_strlcpy(cmd, tmp + j, i - j + 1);
 		j = i + 1;
@@ -65,19 +73,6 @@ void	parsing_proc(t_data *data, char *tmp)
 		free(cmd);
 		if (tmp[i])
 			i++;
-		/*
-		if (tmp[i] == '\0' && (tmp[i -1] == ';' || tmp[i -i] == '|'))
-			break;
-		if (tmp[i] == ';' || tmp[i] == '|' || tmp[i] == '\0')
-		{
-			cmd = (char *)malloc(sizeof(char) * (i - j + 1));
-			ft_strlcpy(cmd, tmp + j, i - j + 1);
-			j = i + 1;
-			put_in_cmd(data, cmd, tmp[i]);
-			free(cmd);
-		}
-		i++;
-		*/
 	}
 }
 
