@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 15:33:17 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 19:42:12 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,50 +60,92 @@ typedef struct s_data
 
 extern int	g_status;
 
-//prompt.c
-void		show_prompt(t_data *data);
-//init_shell.c
-void		init_struct(t_data *data, char **envp);
-void		setting_signal(void);
-//check_cmd.c
-int			check_cmd(t_data *data);
-//error.c
-void		error_msg(char *str);
-//parsing_cmd.c
-void		parsing(t_data *data);
-void		parsing_proc(t_data *data, char *tmp);
-void		put_in_cmd(t_data *data, char *cmd, char let);
-//free_list.c
-void		free_cmd_list(t_data *data);
-//env.c
-t_env		*init_env(char **envp);
-void		ft_export(t_cmd *cmd, t_env *env);
-void		ft_unset(t_cmd *cmd, t_env *env, t_data *data);
-
-char		**make_envp(t_env *env);
-
-int			ft_strcmp(const char *s1, const char *s2);
-
-void		ft_export(t_cmd *cmd, t_env *env);
-
-t_env		*new_env(char *envline);
-
-void		ft_exit(t_cmd *cmd, int flag, t_data *data);
-
+//cd.c
+t_env		*find_env(char *key, t_env *env);
+void		add_env(t_env *env, char *key, char *value);
+void		ch_env(t_env *env, char *key, char *value);
+void		ft_chdir(char *dest, t_env *env);
 void		ft_cd(t_cmd *cmd, t_env *env);
 
-t_env		*find_env(char *key, t_env *env);
-// execute.c
-void		execute(t_data *data, t_m_list *list);
+//check_cmd.c
+int			pipe_error_check2(t_m_list *tmp, int flag);
+int			pipe_error_check(t_data *data);
+int			two_time_error(char *str);
+int			quote_error(char *str);
+int			check_cmd(t_data *data);
 
+//env.c
+t_env		*new_env(char *envline);
+int			get_envlen(char **env);
+t_env		*init_env(char **envp);
+int			env_num(t_env *env);
+char		**make_envp(t_env *env);
+
+//env_util.c
+int			get_keylen(char *str);
+char		*replace_dollar(char *str, t_env *env);
+
+//error.c
+void		error_msg(char *str);
+void		syntax_error_msg(char let);
+
+//execute.c
+void		exec_extern(t_cmd *cmd, char **env);
+void		execute_extern(t_cmd *cmd, char **env);
 void		execute_cmd(t_data *data, t_cmd *cmd, t_env *env, int flag);
 void		execute_list(t_m_list *list, t_data *data, int b_stdin, int b_stdout);
-//pipe.c
-void		create_child(t_m_list *list, t_data *data, int prev);
-void		child(t_m_list *list, t_data *data);
+void		execute(t_data *data, t_m_list *list);
 
-//redirection.c
-int			rd_handler(t_cmd *cmd);
+//exit.c
+int			is_numeric(char *str);
+void		ft_exit(t_cmd *cmd, int flag, t_data *data);
+
+//export.c
+void		print_export(t_env *env);
+void		print_not_valid(char *cmd, char *str);
+void		ft_export(t_cmd *cmd, t_env *env);
+
+//free_list.c
+void		free_env_list(t_data *data);
+void		free_envp(char **env);
+void		free_cmd_data(t_cmd *content);
+void		free_cmd_list(t_data *data);
+
+//init_shell.c
+void		init_struct(t_data *data, char **envp);
+void		sigint_handler(int signal);
+void		sigquit_handler(int signal);
+void		setting_signal(void);
+
+//parsing_cmd.c
+void		put_in_cmd(t_data *data, char *cmd, char let);
+void		parsing_proc(t_data *data, char *tmp);
+void		parsing(t_data *data);
+
+//parsing_util.c
+int			quote_index(char *cmd, char let, int *index);
+char		*put_in_cmdline(char *cmd, char let, int *i);
+char		*put_in_cmdline_normal(char *cmd, char let, int *i);
+
+//pipe.c
+void		child(t_m_list *list, t_data *data);
+void		create_child(t_m_list *list, t_data *data, int prev);
+
+//prompt.c
+void		show_prompt(t_data *data);
+
+//quote.c
+int			key_len(char *str);
+char		*dollar_sing(char *cmdline, t_env *env);
+char		*mixed_quote(char *cmdline, t_env *env);
+char		*double_quote(char *cmdline, t_env *env);
+char		*single_quote(char *cmdline);
+
+//quote_split.c
+int			sep_cnt_quote(char *cmd, char c);
+void		putin(char *cmd, char *cmdline, int from, int i);
+void		sep_cmdline(char *cmd, char c, char **cmdline);
+char		**quote_split(char *cmd, char c);
 
 //rd_util.c
 int			rd_in(char *file);
@@ -112,24 +154,24 @@ int			rd_double_out(char *file);
 void		heredoc(char *end);
 int			find_rd_type(char *rd);
 
-void		free_env_list(t_data *data);
-void		free_envp(char **envp);
-void        reparsing_env(t_data *data);
-char        *cmdline_change(char *cmdline, t_env *env);
-char        *replace_dollar(char *str, t_env *env);
-int         sep_cnt_quote(char *cmd, char c);
-void        putin(char *cmd, char *cmdline, int from, int i);
-void        sep_cmdline(char *cmd, char c, char **cmdline);
-char        **quote_split(char *cmd, char c);
-char        *double_quote(char *cmdline, t_env *env);
-char        *single_quote(char *cmdline);
-int         get_keylen(char *str);
-char        *dollar_sing(char *cmdline, t_env *env);
-char        *mixed_quote(char *cmdline, t_env *env);
-char        *ft_strjoin_free(char *s1, char *s2);
-int         quote_index(char *cmd, char let, int *index);
-char        *put_in_cmdline(char *cmd, char let, int *i);
-char        *put_in_cmdline_normal(char *cmd, char let, int *i);
-void		syntax_error_msg(char let);
-int			pipe_error_check(t_data *data);
+//redirection.c
+int			redirection(char *file, int type, int dup_out, int out);
+int			cmd_cnt(t_cmd *cmd);
+void		print_rd_error(t_cmd *cmd, int status, char *cmdtype);
+int			redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out);
+int			rd_handler(t_cmd *cmd);
+
+//reparsing_cmd.c
+void		reparsing_env(t_data *data);
+char		*cmdline_change(char *cmdline, t_env *env);
+
+//unset.c
+int			ft_strcmp(const char *s1, const char *s2);
+void		free_cnv(t_env *cur);
+void		delete_env(t_env **env, char *key, t_data *data);
+void		ft_unset(t_cmd *cmd, t_env *env, t_data *data);
+
+//util.c
+char		*ft_strjoin_free(char *s1, char *s2);
+
 #endif

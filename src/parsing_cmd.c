@@ -6,13 +6,12 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 18:44:03 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/08 19:30:36 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
-#include <string.h>
 
 void	put_in_cmd(t_data *data, char *cmd, char let)
 {
@@ -62,7 +61,7 @@ void	parsing_proc(t_data *data, char *tmp)
 			if (tmp[i] == '"')
 				i = ft_strchr(&tmp[i + 1], '"') - tmp + 1;
 			else if (tmp[i] == '\'')
-				i = ft_strchr(&tmp[i + 1] , '\'') - tmp + 1;
+				i = ft_strchr(&tmp[i + 1], '\'') - tmp + 1;
 			else
 				i++;
 		}
