@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:31:59 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:55:46 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,13 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	list = data->lstlast;
 	new_list = (t_m_list *)malloc(sizeof(t_m_list));
 	cmd_data = (t_cmd *)malloc(sizeof(t_cmd));
+	init_cmd(cmd_data, cmd, let);
 	//추가
-	cmd_data->out = 0;
-	if (ft_strrchr(cmd, '>'))
-		cmd_data->out = 1;
+	new_list->content = cmd_data;
 	if (ft_strchr(cmd, '"') || ft_strchr(cmd, '\''))
 		cmd_data->cmdline = quote_split(cmd, ' ');
 	else
 		cmd_data->cmdline = ft_split(cmd, ' ');
-	if (let == '|')
-		cmd_data->flag = 1;
-	else if (let == ';' || let == '\0')
-		cmd_data->flag = 0;
 	new_list->content = cmd_data;
 	new_list->next = NULL;
 	if (list == NULL)
@@ -46,7 +41,7 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	}
 }
 
-int		parsing_proc(t_data *data, char *tmp)
+int	parsing_proc(t_data *data, char *tmp)
 {
 	int		i;
 	int		j;

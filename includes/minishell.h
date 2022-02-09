@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:37:32 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:48:29 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void		free_cmd_data(t_cmd *content);
 void		free_cmd_list(t_data *data);
 
 //init_shell.c
+void		init_cmd(t_cmd *cmd_data, char *cmd, char let);
 void		init_struct(t_data *data, char **envp);
 void		sigint_handler(int signal);
 void		sigquit_handler(int signal);

@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:23:58 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 18:18:28 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ char	*put_in_cmdline_normal(char *cmd, char let, int *i)
 	return (cmdline);
 }
 
-int		find_quote_match(char *tmp, int i)
+int	find_quote_match(char *tmp, int i)
 {
-	char *match_ptr;
+	char	*match_ptr;
 
 	if (tmp[i] == '"')
 	{
