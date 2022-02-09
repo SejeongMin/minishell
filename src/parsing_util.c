@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 18:36:27 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 18:18:28 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,29 @@ char	*put_in_cmdline_normal(char *cmd, char let, int *i)
 	cmdline = (char *)malloc((*i - from + 1) * sizeof(char));
 	putin(cmd, cmdline, from, *i);
 	return (cmdline);
+}
+
+int	find_quote_match(char *tmp, int i)
+{
+	char	*match_ptr;
+
+	if (tmp[i] == '"')
+	{
+		match_ptr = ft_strchr(&tmp[i + 1], '"');
+		if (match_ptr == NULL)
+			return (-1);
+		else
+			i = match_ptr - tmp + 1;
+	}
+	else if (tmp[i] == '\'')
+	{
+		match_ptr = ft_strchr(&tmp[i + 1], '\'');
+		if (match_ptr == NULL)
+			return (-1);
+		else
+			i = match_ptr - tmp + 1;
+	}
+	else
+		i++;
+	return (i);
 }

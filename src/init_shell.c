@@ -6,12 +6,23 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/02/07 14:51:49 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/09 17:50:17 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
+
+void	init_cmd(t_cmd *cmd_data, char *cmd, char let)
+{
+	cmd_data->out = 0;
+	if (ft_strrchr(cmd, '>'))
+		cmd_data->out = 1;
+	if (let == '|')
+		cmd_data->flag = 1;
+	else if (let == ';' || let == '\0')
+		cmd_data->flag = 0;
+}
 
 void	init_struct(t_data *data, char **envp)
 {

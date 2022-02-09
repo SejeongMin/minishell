@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 19:42:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:48:29 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void		ft_cd(t_cmd *cmd, t_env *env);
 //check_cmd.c
 int			pipe_error_check2(t_m_list *tmp, int flag);
 int			pipe_error_check(t_data *data);
-int			two_time_error(char *str);
-int			quote_error(char *str);
 int			check_cmd(t_data *data);
 
 //env.c
@@ -93,7 +91,8 @@ void		syntax_error_msg(char let);
 void		exec_extern(t_cmd *cmd, char **env);
 void		execute_extern(t_cmd *cmd, char **env);
 void		execute_cmd(t_data *data, t_cmd *cmd, t_env *env, int flag);
-void		execute_list(t_m_list *list, t_data *data, int b_stdin, int b_stdout);
+void		execute_list(t_m_list *list, t_data *data, \
+		int b_stdin, int b_stdout);
 void		execute(t_data *data, t_m_list *list);
 
 //exit.c
@@ -112,6 +111,7 @@ void		free_cmd_data(t_cmd *content);
 void		free_cmd_list(t_data *data);
 
 //init_shell.c
+void		init_cmd(t_cmd *cmd_data, char *cmd, char let);
 void		init_struct(t_data *data, char **envp);
 void		sigint_handler(int signal);
 void		sigquit_handler(int signal);
@@ -119,13 +119,14 @@ void		setting_signal(void);
 
 //parsing_cmd.c
 void		put_in_cmd(t_data *data, char *cmd, char let);
-void		parsing_proc(t_data *data, char *tmp);
+int			parsing_proc(t_data *data, char *tmp);
 void		parsing(t_data *data);
 
 //parsing_util.c
 int			quote_index(char *cmd, char let, int *index);
 char		*put_in_cmdline(char *cmd, char let, int *i);
 char		*put_in_cmdline_normal(char *cmd, char let, int *i);
+int			find_quote_match(char *tmp, int i);
 
 //pipe.c
 void		child(t_m_list *list, t_data *data);
@@ -158,7 +159,8 @@ int			find_rd_type(char *rd);
 int			redirection(char *file, int type, int dup_out, int out);
 int			cmd_cnt(t_cmd *cmd);
 void		print_rd_error(t_cmd *cmd, int status, char *cmdtype);
-int			redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out);
+int			redirect(t_cmd *cmd, char **cmdline, \
+		char **new_cmdline, int dup_out);
 int			rd_handler(t_cmd *cmd);
 
 //reparsing_cmd.c
@@ -173,5 +175,4 @@ void		ft_unset(t_cmd *cmd, t_env *env, t_data *data);
 
 //util.c
 char		*ft_strjoin_free(char *s1, char *s2);
-
 #endif
