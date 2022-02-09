@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:41:40 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:26:04 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:37:19 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,6 @@ int	pipe_error_check(t_data *data)
 		}
 		tmp = tmp->next;
 	}
-	return (0);
-}
-
-int	quote_error(char *str)
-{
-	int	index;
-	int	single_cnt;
-	int	double_cnt;
-
-	index = 0;
-	single_cnt = 0;
-	double_cnt = 0;
-	while (str[index])
-	{
-		if (str[index] == '\'')
-			single_cnt++;
-		else if (str[index] == '\"')
-			double_cnt++;
-		index++;
-	}
-	if (single_cnt % 2 || double_cnt % 2)
-		return (1);
 	return (0);
 }
 

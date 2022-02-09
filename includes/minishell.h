@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:31:42 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:37:32 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void		ft_cd(t_cmd *cmd, t_env *env);
 //check_cmd.c
 int			pipe_error_check2(t_m_list *tmp, int flag);
 int			pipe_error_check(t_data *data);
-int			quote_error(char *str);
 int			check_cmd(t_data *data);
 
 //env.c
