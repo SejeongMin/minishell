@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:41:40 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 19:15:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:26:04 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,6 @@ int	pipe_error_check(t_data *data)
 	return (0);
 }
 
-int	two_time_error(char *str)
-{
-	while (*str)
-	{
-		if (*str == ';')
-		{
-			if (*(str + 1) != '\0' && *(str + 1) == ';')
-			{
-				syntax_error_msg(';');
-				return (1);
-			}
-		}
-		else if (*str == '|')
-		{
-			if (*(str + 1) != '\0' && *(str + 1) == '|')
-			{
-				syntax_error_msg('|');
-				return (1);
-			}
-		}
-		str++;
-	}
-	return (0);
-}
-
 int	quote_error(char *str)
 {
 	int	index;
@@ -114,10 +89,10 @@ int	check_cmd(t_data *data)
 	str = data->cmd_set;
 	if (str == NULL)
 		return (1);
-	if (quote_error(str) == 1)
-	{
-		error_msg("shell : quote_error\n");
-		return (1);
-	}
+//	if (quote_error(str) == 1)
+//	{
+//		error_msg("shell : quote_error\n");
+//		return (1);
+//	}
 	return (0);
 }

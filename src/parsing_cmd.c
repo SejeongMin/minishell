@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:51:05 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 19:30:36 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/09 17:31:59 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	put_in_cmd(t_data *data, char *cmd, char let)
 	}
 }
 
-void	parsing_proc(t_data *data, char *tmp)
+int		parsing_proc(t_data *data, char *tmp)
 {
 	int		i;
 	int		j;
@@ -58,12 +58,9 @@ void	parsing_proc(t_data *data, char *tmp)
 	{
 		while (tmp[i] && tmp[i] != ';' && tmp[i] != '|')
 		{
-			if (tmp[i] == '"')
-				i = ft_strchr(&tmp[i + 1], '"') - tmp + 1;
-			else if (tmp[i] == '\'')
-				i = ft_strchr(&tmp[i + 1], '\'') - tmp + 1;
-			else
-				i++;
+			i = find_quote_match(tmp, i);
+			if (i == -1)
+				return (1);
 		}
 		cmd = (char *)malloc(sizeof(char) *(i - j + 1));
 		ft_strlcpy(cmd, tmp + j, i - j + 1);
@@ -73,6 +70,7 @@ void	parsing_proc(t_data *data, char *tmp)
 		if (tmp[i])
 			i++;
 	}
+	return (0);
 }
 
 void	parsing(t_data *data)
@@ -80,7 +78,11 @@ void	parsing(t_data *data)
 	char	*tmp;
 
 	tmp = data->cmd_set;
-	parsing_proc(data, tmp);
+	if (parsing_proc(data, tmp))
+	{
+		error_msg("minishell: syntax error: unexpected end of file\n");
+		return ;
+	}
 	if (pipe_error_check(data))
 		return ;
 	reparsing_env(data);
