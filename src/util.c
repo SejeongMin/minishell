@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 00:17:08 by soum              #+#    #+#             */
-/*   Updated: 2022/02/10 14:55:58 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/10 17:59:14 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ t_env	*replace_env(char **split_env, t_env *findenv)
 		free(split_env);
 	}
 	return (NULL);
+}
+
+void	join_path(t_cmd *cmd, char **path, char **command)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (path[i])
+	{
+		tmp = ft_strjoin(path[i], "/");
+		command[i] = ft_strjoin(tmp, cmd->cmdline[0]);
+		free(tmp);
+		i++;
+	}
+	command[i] = 0;
 }
