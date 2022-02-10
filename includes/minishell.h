@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/09 17:48:29 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/10 14:56:15 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_cmd
 {
 	char	**cmdline;
 	int		flag;
-	char	quote;
 	int		fd[2];
 	int		out;
 }	t_cmd;
@@ -51,7 +50,6 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	int			status;
 	char		*cmd_set;
 	t_m_list	*lstlast;
 	t_env		*env;
@@ -73,7 +71,7 @@ int			pipe_error_check(t_data *data);
 int			check_cmd(t_data *data);
 
 //env.c
-t_env		*new_env(char *envline);
+t_env		*new_env(char *envline, t_env *env);
 int			get_envlen(char **env);
 t_env		*init_env(char **envp);
 int			env_num(t_env *env);
@@ -175,4 +173,5 @@ void		ft_unset(t_cmd *cmd, t_env *env, t_data *data);
 
 //util.c
 char		*ft_strjoin_free(char *s1, char *s2);
+t_env		*replace_env(char **split_env, t_env *findenv);
 #endif

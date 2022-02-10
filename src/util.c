@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 00:17:08 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 19:17:21 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/10 14:55:58 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,23 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	ft_strlcpy(tmp + ft_strlen(s1), s2, ft_strlen(s2) + 1);
 	free(s1);
 	return (tmp);
+}
+
+t_env	*replace_env(char **split_env, t_env *findenv)
+{
+	if (split_env[1])
+	{
+		free(findenv->value);
+		findenv->value = ft_strdup(split_env[1]);
+		free(split_env[0]);
+		free(split_env[1]);
+		free(split_env);
+	}
+	else
+	{
+		free(split_env[0]);
+		free(split_env[1]);
+		free(split_env);
+	}
+	return (NULL);
 }
