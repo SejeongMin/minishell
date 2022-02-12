@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/13 00:17:45 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/13 00:29:53 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +47,6 @@ char	*new_put_in_cmdline(char *cmd, int *i)
 	putin(cmd, cmdline, from, (*i));
 	return (cmdline);
 }
-
-/** char	*put_in_cmdline(char *cmd, char let, int *i) */
-/** { */
-/**     int		from; */
-/**     char	*cmdline; */
-/**  */
-/**     from = *i; */
-/**     (*i)++; */
-/**     while (cmd[*i] && cmd[*i] != let) */
-/**         (*i)++; */
-/**     while (cmd[*i] && cmd[*i] != ' ') */
-/**         (*i)++; */
-/**     cmdline = (char *)malloc((*i - from + 2) * sizeof(char)); */
-/**     putin(cmd, cmdline, from, (*i + 1)); */
-/**     return (cmdline); */
-/** } */
-/**  */
-/** char	*put_in_cmdline_normal(char *cmd, char let, int *i) */
-/** { */
-/**     int		from; */
-/**     char	*cmdline; */
-/**  */
-/**     from = *i; */
-/**     while (cmd[*i] && cmd[*i] != let) */
-/**         (*i)++; */
-/**     cmdline = (char *)malloc((*i - from + 1) * sizeof(char)); */
-/**     putin(cmd, cmdline, from, *i); */
-/**     return (cmdline); */
-/** } */
 
 int	find_quote_match(char *tmp, int i)
 {
