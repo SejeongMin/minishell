@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:07:20 by soum              #+#    #+#             */
-/*   Updated: 2022/02/08 18:38:38 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/12 18:16:28 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	sep_cmdline(char *cmd, char c, char **cmdline)
 	while (i < (int)ft_strlen(cmd))
 	{
 		if (cmd[i] == '"')
-			cmdline[index++] = put_in_cmdline(cmd, '"', &i);
+			cmdline[index++] = new_put_in_cmdline(cmd, &i);
 		else if (cmd[i] == '\'')
-			cmdline[index++] = put_in_cmdline(cmd, '\'', &i);
+			cmdline[index++] = new_put_in_cmdline(cmd, &i);
 		else if (cmd[i] != c)
-			cmdline[index++] = put_in_cmdline_normal(cmd, c, &i);
+			cmdline[index++] = new_put_in_cmdline(cmd, &i);
 		if (cmd[i] == ' ')
 			i++;
 	}
