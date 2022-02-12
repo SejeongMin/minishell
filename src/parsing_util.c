@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/12 18:14:44 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/13 00:17:45 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ int	quote_index(char *cmd, char let, int *i)
 		else
 			(*i)++;
 	}
-	/** (*index)++; */
-	/** while (cmd[*index] && cmd[*index] != let) */
-	/**     (*index)++; */
-	/** while (cmd[*index] && cmd[*index] != ' ') */
-	/**     (*index)++; */
 	return (1);
 }
 
