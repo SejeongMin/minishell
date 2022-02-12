@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:03:40 by soum              #+#    #+#             */
-/*   Updated: 2022/02/10 15:07:51 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/12 22:33:14 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*double_quote(char *cmdline, t_env *env)
 	char	*new_cmdline;
 	char	let[2];
 	int		index;
+	char	*repl;
 
 	index = 0;
 	let[1] = 0;
@@ -62,9 +63,13 @@ char	*double_quote(char *cmdline, t_env *env)
 	{
 		if (cmdline[index] == '$')
 		{
-			if (replace_dollar(&cmdline[index], env))
+			repl = replace_dollar(&cmdline[index], env);
+			if (repl)
+			{
 				new_cmdline = ft_strjoin_free(new_cmdline, \
-						replace_dollar(&cmdline[index], env));
+						repl);
+				free(repl);
+			}
 			index += key_len(&cmdline[index + 1]);
 		}
 		else if (cmdline[index] != '"')
