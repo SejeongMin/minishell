@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:36:44 by semin             #+#    #+#             */
-/*   Updated: 2022/02/08 00:43:58 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 01:24:33 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 int	redirection(char *file, int type, int dup_out, int out)
 {
 	int	backup;
+	int	status;
 
 	if (!file)
 		return (-1);
+	status = 0;
 	backup = dup(1);
 	if (type == 1)
 		return (rd_in(file));
@@ -30,14 +32,12 @@ int	redirection(char *file, int type, int dup_out, int out)
 	{
 		if (out)
 			dup2(dup_out, 1);
-		heredoc(file);
+		status = heredoc(file);
 		if (out)
 			dup2(backup, 1);
-		rd_in("heredocfile");
-		unlink("heredocfile");
 	}
 	close(backup);
-	return (0);
+	return (status);
 }
 
 int	cmd_cnt(t_cmd *cmd)
@@ -69,6 +69,8 @@ void	print_rd_error(t_cmd *cmd, int status, char *cmdtype)
 			printf("minishell: syntax error near unexpected token `|'\n");
 		g_status = 258;
 	}
+	else if (status == -2)
+		g_status = 1;
 	else
 	{
 		printf("minishell: %s: %s\n", cmdtype, strerror(errno));
@@ -91,7 +93,7 @@ int	redirect(t_cmd *cmd, char **cmdline, char **new_cmdline, int dup_out)
 		if (rd_type)
 		{
 			status = redirection(cmdline[++idx], rd_type, dup_out, cmd->out);
-			if (status == -1 || (status && rd_type == 1))
+			if (status < 0 || (status && rd_type == 1))
 			{
 				dup2(dup_out, 1);
 				print_rd_error(cmd, status, cmdline[idx]);

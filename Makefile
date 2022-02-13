@@ -6,7 +6,7 @@
 #    By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:49:29 by soum              #+#    #+#              #
-#    Updated: 2022/02/13 21:32:02 by semin            ###   ########.fr        #
+#    Updated: 2022/02/14 01:10:29 by semin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = main.c \
 	   src/quote.c \
 	   src/quote_split.c \
 	   src/echo.c \
+	   src/heredoc.c \
 
 LIBFT = libft
 LIBFT_LIB = Libft/libft.a

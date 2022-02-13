@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:01:53 by semin             #+#    #+#             */
-/*   Updated: 2022/02/10 14:01:55 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 01:24:12 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,6 @@ int	rd_double_out(char *file)
 	dup2(newfd, 1);
 	close(newfd);
 	return (0);
-}
-
-void	heredoc(char *end)
-{
-	char	*line;
-	int		newfd;
-
-	newfd = open("heredocfile", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	while (1)
-	{
-		line = readline("> ");
-		if (!ft_strcmp(line, end))
-		{
-			free(line);
-			break ;
-		}
-		write(newfd, line, ft_strlen(line));
-		write(newfd, "\n", 1);
-	}
-	close(newfd);
 }
 
 int	find_rd_type(char *rd)

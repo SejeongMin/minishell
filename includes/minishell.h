@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/13 21:31:08 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 00:55:30 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char		**quote_split(char *cmd, char c);
 int			rd_in(char *file);
 int			rd_out(char *file);
 int			rd_double_out(char *file);
-void		heredoc(char *end);
+int			heredoc(char *end);
 int			find_rd_type(char *rd);
 
 //redirection.c
