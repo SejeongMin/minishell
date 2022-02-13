@@ -6,16 +6,15 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:11:52 by soum              #+#    #+#             */
-/*   Updated: 2022/02/13 00:29:53 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/13 13:50:19 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../Libft/libft.h"
 
-int	quote_index(char *cmd, char let, int *i)
+int	quote_index(char *cmd, int *i)
 {
-	(void)let;
 	while (cmd[*i] && cmd[*i] != ' ')
 	{
 		if (cmd[*i] == '"')
@@ -28,7 +27,7 @@ int	quote_index(char *cmd, char let, int *i)
 	return (1);
 }
 
-char	*new_put_in_cmdline(char *cmd, int *i)
+char	*put_in_cmdline(char *cmd, int *i)
 {
 	int		from;
 	char	*cmdline;

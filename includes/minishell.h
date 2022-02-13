@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/12 21:55:02 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/13 13:49:41 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,9 @@ int			parsing_proc(t_data *data, char *tmp);
 void		parsing(t_data *data);
 
 //parsing_util.c
-int			quote_index(char *cmd, char let, int *i);
-/** char		*put_in_cmdline(char *cmd, char let, int *i); */
-/** char		*put_in_cmdline_normal(char *cmd, char let, int *i); */
+int			quote_index(char *cmd, int *i);
 int			find_quote_match(char *tmp, int i);
-char		*new_put_in_cmdline(char *cmd, int *i);
+char		*put_in_cmdline(char *cmd, int *i);
 
 //pipe.c
 void		child(t_m_list *list, t_data *data);
