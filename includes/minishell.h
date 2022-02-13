@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:53:23 by soum              #+#    #+#             */
-/*   Updated: 2022/02/13 13:49:41 by soum             ###   ########.fr       */
+/*   Updated: 2022/02/13 21:31:08 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,8 @@ char		*ft_strjoin_free(char *s1, char *s2);
 t_env		*replace_env(char **split_env, t_env *findenv);
 void		join_path(t_cmd *cmd, char **path, char **command);
 void		reset_terminal(void);
+
+//echo.c
+void		ft_echo(t_cmd *cmd);
 
 #endif

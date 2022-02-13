@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:03 by semin             #+#    #+#             */
-/*   Updated: 2022/02/12 21:52:20 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/13 21:31:47 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	execute_cmd(t_data *data, t_cmd *cmd, t_env *env, int flag)
 		ft_unset(cmd, env, data);
 	else if (!ft_strcmp(cmd->cmdline[0], "exit"))
 		ft_exit(cmd, flag, data);
+	else if (!ft_strcmp(cmd->cmdline[0], "echo"))
+		ft_echo(cmd);
 	else
 		execute_extern(cmd, make_envp(env), env);
 }
