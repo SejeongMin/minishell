@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:14:30 by semin             #+#    #+#             */
-/*   Updated: 2022/02/12 21:56:12 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 19:32:18 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_exit(t_cmd *cmd, int flag, t_data *data)
 	{
 		printf("minishell: exit: %s: numeric argument required\n", \
 				cmd->cmdline[1]);
-		status = 1;
+		status = 255;
 	}
 	else if (cmd->cmdline[2])
 	{

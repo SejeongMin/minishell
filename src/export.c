@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 04:10:11 by semin             #+#    #+#             */
-/*   Updated: 2022/02/10 15:17:38 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 14:15:26 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_env	*export_util(t_cmd *cmd, int i, t_env *env, t_env *cur)
 
 	if (ft_isalpha(cmd->cmdline[i][0]) || cmd->cmdline[i][0] == '_')
 	{
-		newenv = new_env(cmd->cmdline[1], env);
+		newenv = new_env(cmd->cmdline[i], env);
 		if (newenv)
 		{
 			cur->next = newenv;

@@ -6,7 +6,7 @@
 /*   By: semin <semin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 16:11:04 by soum              #+#    #+#             */
-/*   Updated: 2022/02/12 22:05:43 by semin            ###   ########.fr       */
+/*   Updated: 2022/02/14 19:34:11 by semin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ void	sigint_handler(int signal)
 	{
 		g_status = 1;
 		printf("^C\n");
+		g_status = 130;
 		return ;
 	}
 	printf("minishell$ \n");
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();
-	g_status = 130;
+	g_status = 1;
 }
 
 void	sigquit_handler(int signal)
